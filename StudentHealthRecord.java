@@ -1,21 +1,42 @@
-package sut.se.g08.entity;
-
+package com.cpe.backend.entity;
 import lombok.*;
 import javax.persistence.*;
+import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Getter @Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "StudentHealthRecord")
-public class VinaiType {
+@Table(name="StudentHealthRecord")
+public class StudentHealthRecord {
     @Id
-    @SequenceGenerator(name="studenthealthrecord_seq",sequenceName="studenthealthrecord_seq")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="studenthealthrecord_seq")
-    @Column(name="studenthealthrecord_ID")
-    private @NonNull Long StudentId;
-    private @NonNull String  name;
-    private @NonNull String healthinfo;
+    @SequenceGenerator(name="StudentHealthRecord_seq",sequenceName="StudentHealthRecord_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="StudentHealthRecord_seq")
+    @Column(name = "StudentHealthRecord_ID", unique = true, nullable = false)
+	
+	private @NonNull Long StudentHealthRecordid;
+	private @NonNull Integer weight;
+    private @NonNull Integer height;
+    
+    
+   
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Major.class)
+    @JoinColumn(name = "MAJOR_ID")
+    private Major major;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
+    @JoinColumn(name = "StudentProfile_ID")
+    private StudentProfile studentprofile;
+
+	
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugAllergyHistory.class)
+    @JoinColumn(name = "DrugAllergyHistory_ID")
+    private DrugAllergyHistory drugallergyhistory;
+
+	
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = CongenitalDisease.class)
+    @JoinColumn(name = "CongenitalDisease_ID")
+    private CongenitalDisease congenitaldisease;
 }
