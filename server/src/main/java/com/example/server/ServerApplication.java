@@ -7,6 +7,10 @@ import com.example.server.Discipline.entity.Punish;
 import com.example.server.Discipline.repository.BreakruleRepository;
 import com.example.server.Discipline.repository.PunishRepository;
 import com.example.server.FinancialInfo.repository.*;
+import com.example.server.Scholarship.entity.ScholarshipOfficer;
+import com.example.server.Scholarship.entity.ScholarshipType;
+import com.example.server.Scholarship.repository.ScholarshipOfficerRepository;
+import com.example.server.Scholarship.repository.ScholarshipTypeRepository;
 import com.example.server.StudentHealthRecord.entity.CongenitalDisease;
 import com.example.server.StudentHealthRecord.entity.DrugAllergyHistory;
 import com.example.server.StudentHealthRecord.repository.*;
@@ -33,9 +37,11 @@ public class ServerApplication {
 			StatusRepository statusRepository, StudentProfileRepository studentprofileRepository,
 			ActivitiesRepository activitiesRepository, InstitutionRepository institutionRepository,
 			BreakruleRepository breakruleRepository, PunishRepository punishRepository,
-			SchoolYearRepository schoolyearRepository, LevelofUseRepository levelofuseRepository,
+			ScholarshipOfficerRepository scholarshipOfficerRepository, SchoolYearRepository schoolyearRepository,
+			LevelofUseRepository levelofuseRepository, ScholarshipTypeRepository scholarshipTypeRepository,
 			MoneyFormParentRepository moneyformparentRepository, SpendMoneyRepository spendmoneyRepository,
-			CongenitalDiseaseRepository congenitalDiseaseRepository, DrugAllergyHistoryRepository drugAllergyHistoryRepository) {
+			CongenitalDiseaseRepository congenitalDiseaseRepository,
+			DrugAllergyHistoryRepository drugAllergyHistoryRepository) {
 		return args -> {
 			Stream.of("ผู้หญิง", "ผู้ชาย", "อื่นๆ").forEach(sex -> {
 				Gender gender = new Gender();
@@ -112,6 +118,19 @@ public class ServerApplication {
 				CongenitalDisease congenitalDisease = new CongenitalDisease();
 				congenitalDisease.setCongenitaldisease(congenitaldisease);
 				congenitalDiseaseRepository.save(congenitalDisease);
+			});
+
+			Stream.of("ทุนศักยบันณฑิต", "ทุน 84 พรรษา", "ทุนกู้ยืมการศึกษา").forEach(scholarshipType -> {
+				ScholarshipType scholarshiptype = new ScholarshipType();
+				scholarshiptype.setGoodEducation(scholarshipType);
+				scholarshiptype.setEducationalLoans(scholarshipType);
+				scholarshipTypeRepository.save(scholarshiptype);
+			});
+
+			Stream.of("พนักงาน งานทุน1", "พนักงาน งานทุน2", "พนักงาน งานทุน3").forEach(officer -> {
+				ScholarshipOfficer scholarshipOfficer = new ScholarshipOfficer();
+				scholarshipOfficer.setOfficername(officer);
+				scholarshipOfficerRepository.save(scholarshipOfficer);
 			});
 		};
 	}
