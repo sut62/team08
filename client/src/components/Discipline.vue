@@ -116,14 +116,12 @@
 
 <script>
 import http from "../http-common"
-
 export default {
   // computed: {
   //     computedDateFormattedMomentjs() {
   //         return this.date ? moment(this.date).format("dddd Do, MMMM YYYY") : "";
   //     }
   // },
-
   name: "discipline",
   data() {
     return {
@@ -135,7 +133,10 @@ export default {
         punishId: "",
         since: "",
         until: ""
-      }
+      },
+      studentprofiles: [],
+      breakrules: [],
+      punishs: []
     }
   },
   methods: {
@@ -148,6 +149,7 @@ export default {
       this.discipline.since = ""
       this.discipline.until = ""
     },
+    // @PostMapping("/discipline/{studentproId}/{schoolyear}/{ruleId}/{point}/{punishId}/{since}/{until}")
     saveDiscipline() {
       http
         .post(
@@ -166,7 +168,6 @@ export default {
             "/" +
             this.discipline.until
         )
-
         .then(response => {
           console.log(response.data)
           if (response.data) {
@@ -181,7 +182,6 @@ export default {
           console.log(e)
         })
     },
-
     getStudentProfile() {
       http
         .get("/student")
@@ -193,7 +193,6 @@ export default {
           console.log(e)
         })
     },
-
     getBreakrule() {
       http
         .get("/breakrules")
@@ -205,7 +204,6 @@ export default {
           console.log(e)
         })
     },
-
     getPunish() {
       http
         .get("/punishs")
@@ -217,7 +215,6 @@ export default {
           console.log(e)
         })
     },
-
     refreshList() {
       this.getStudentProfile()
       this.getBreakrule()
