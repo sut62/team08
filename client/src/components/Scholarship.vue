@@ -1,0 +1,219 @@
+<template>
+  <v-app>
+    <v-app-bar app dark class="red">
+      <v-toolbar-title class="headline text-uppercase">
+        <span>System :</span>
+        <span class="font-weight-light">scholarship</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn class="ma-2" text icon color="lighten-2" :to="{name: 'home'}">
+        <span class="mr-2">
+          <v-icon large>home</v-icon>
+        </span>
+      </v-btn>
+    </v-app-bar>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div>
+      <v-layout text-center wrap>
+        <v-flex mb-4>
+          <br />
+          <h1 class="display-2 font-weight-bold mb-3">Scholarship</h1>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    <div>
+      <v-row justify="center">
+        <v-col cols="7">
+          <v-form v-model="valid" ref="form">
+            <v-row justify="center">
+              <v-col cols="5">
+                <v-select
+                  label="กรุณาเลือกนักศึกษา"
+                  outlined
+                  v-model="scholarship.studentproId"
+                  :items="studentprofiles"
+                  item-text="namethai"
+                  item-value="studentproId"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+                <v-select
+                  label="กรุณาเลือกปรเภททุนการศึกษา"
+                  outlined
+                  v-model="scholarship.scholarshipTypeId"
+                  :items="scholarshiptypes"
+                  item-text="goodEducation"
+                  item-value="scholarshipTypeid"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+                <v-text-field
+                  label="กรุณาป้อนจำนวนเงินทุน"
+                  outlined
+                  type="text"
+                  v-model="scholarship.money"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-text-field>
+
+
+                <v-select
+                  label="กรุณาเลือกเจ้าหน้าที่ งานทุน"
+                  outlined
+                  v-model="scholarship.officerId"
+                  :items="scholarshipOfficers"
+                  item-text="officername"
+                  item-value="officerid"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+
+                
+                <v-menu v-model="menu1" :close-on-content-click="false" full-width max-width="290">
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      :value="computedDateFormattedMomentjs"
+                      clearable
+                      label="วัน/เดือน/ปี"
+                      readonly
+                      prepend-icon=" "
+                      v-on="on"
+                      locale="th"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker locale="th" v-model="scholarship.paydate" @change="menu1 = false"></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-btn @click="savescholarship" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
+        <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+      </v-row>
+      <br />
+    </div>
+  </v-app>
+</template>
+
+<script>
+import http from "../http-common"
+import moment from "moment"
+
+export default {
+  name: "scholarship",
+  computed: {
+    computedDateFormattedMomentjs() {
+      return this.scholarship.paydate
+        ? moment(this.scholarship.paydate).format("dddd Do, MMMM YYYY")
+        : ""
+    }
+  },
+  data() {
+    return {
+      scholarship: {
+        scholarshipTypeId: "",
+        studentproId: "",
+        officerId: "",
+        money: "",
+        paydate: "",
+      },
+      studentprofiles: [],
+      scholarshipOfficers: [],
+      scholarshiptypes: [],
+      menu1: false
+    }
+  },
+  methods: {
+    clear() {
+      this.scholarship.scholarshipTypeId = ""
+      this.scholarship.studentproId = ""
+      this.scholarship.officerId = ""
+      this.scholarship.name = ""
+      this.scholarship.paydate = ""
+      this.scholarship.scholar = ""
+    },
+    //   @PostMapping("/scholarship/{scholarshipTypeid}/{stuid}/{officerid}/{name}/{paydate}/{scholar}")
+    savescholarship() {
+      http
+        .post(
+          "/scholarship/" +
+            this.scholarship.scholarshipTypeId +
+            "/" +
+            this.scholarship.studentproId +
+            "/" +
+            this.scholarship.officerId +
+            "/" +
+            this.scholarship.money +
+            "/" +
+            this.scholarship.paydate 
+        )
+        .then(response => {
+          console.log(response.data)
+          if (response.data) {
+            alert("บันทึกสำเร็จ")
+          } else {
+            alert("บันทึกไม่สำเร็จ")
+          }
+        })
+        .catch(e => {
+          alert("บันทึกไม่สำเร็จ")
+          console.log(e)
+        })
+    },
+
+    getStudentProfile() {
+      http
+        .get("/student")
+        .then(response => {
+          this.studentprofiles = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+
+    getScholarshipOfficers() {
+      http
+        .get("/scholarshipOfficers")
+        .then(response => {
+          this.scholarshipOfficers = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+
+    getScholarshipTypes() {
+      http
+        .get("/scholarshiptypes")
+        .then(response => {
+          this.scholarshiptypes = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    refreshList() {
+      this.getStudentProfile()
+      this.getScholarshipOfficers()
+      this.getScholarshipTypes()
+    }
+    /* eslint-enable no-console */
+  },
+  mounted() {
+    this.getStudentProfile()
+    this.getScholarshipOfficers()
+    this.getScholarshipTypes()
+  }
+}
+</script>
