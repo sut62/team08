@@ -66,7 +66,7 @@
                         <v-text-field
                           :value="computedDateFormattedMomentjs"
                           clearable
-                          label="วัน/เดือน/ปีเกิด"
+                          label="วัน/เดือน/ปี"
                           readonly
                           prepend-icon=" "
                           v-on="on"
