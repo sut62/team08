@@ -22,4 +22,4 @@ jobs:
       run: |
         cd server
         chmod 755 ./gradlew
-	./gradlew test
+	    ./gradlew test
