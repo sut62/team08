@@ -21,4 +21,5 @@ jobs:
     - name: Run gradle test
       run: |
         cd server
-        chmod 755 ./gradlew test
+        chmod 755 ./gradlew
+	./gradlew test
