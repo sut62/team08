@@ -21,4 +21,4 @@ jobs:
     - name: Run gradle test
       run: |
         cd server
-        ./gradlew test
+        chmod +x ./gradlew test
