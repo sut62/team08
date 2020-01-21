@@ -3,14 +3,15 @@ package com.example.server.activities.entity;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.example.server.studentprofile.entity.StudentProfile;
 
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -20,18 +21,22 @@ public class Activities {
     @Id
     @SequenceGenerator(name = "Activities_seq", sequenceName = "Activities_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Activities_seq")
-    @Column(name = "Activities_ID", unique = true, nullable = true)
+    @Column(name = "Activities_ID", unique = true)
 
-    private @NotNull long actid;
+    private @NotNull Long actid;
     private @NotNull Date date;
+
+    @Size(min = 5, max = 20)
     private @NotNull String actname;
+
+    @Size(min = 10, max = 10)
     private @NotNull String tel;
 
-    public long getActid() {
+    public Long getActid() {
         return this.actid;
     }
 
-    public void setActid(long actid) {
+    public void setActid(Long actid) {
         this.actid = actid;
     }
 

@@ -34,14 +34,14 @@ public class ServerApplication {
 
 	@Bean
 	ApplicationRunner init(GenderRepository genderRepository, MajorRepository majorRepository,
-			StatusRepository statusRepository, StudentProfileRepository studentprofileRepository,
-			ActivitiesRepository activitiesRepository, InstitutionRepository institutionRepository,
-			BreakruleRepository breakruleRepository, PunishRepository punishRepository,
-			ScholarshipOfficerRepository scholarshipOfficerRepository, SchoolYearRepository schoolyearRepository,
-			LevelofUseRepository levelofuseRepository, ScholarshipTypeRepository scholarshipTypeRepository,
-			MoneyFormParentRepository moneyformparentRepository, SpendMoneyRepository spendmoneyRepository,
-			CongenitalDiseaseRepository congenitalDiseaseRepository,
-			DrugAllergyHistoryRepository drugAllergyHistoryRepository) {
+						   StatusRepository statusRepository, StudentProfileRepository studentprofileRepository,
+						   ActivitiesRepository activitiesRepository, InstitutionRepository institutionRepository,
+						   BreakruleRepository breakruleRepository, PunishRepository punishRepository,
+						   ScholarshipOfficerRepository scholarshipOfficerRepository, SchoolYearRepository schoolyearRepository,
+						   LevelofUseRepository levelofuseRepository, ScholarshipTypeRepository scholarshipTypeRepository,
+						   MoneyFormParentRepository moneyformparentRepository, SpendMoneyRepository spendmoneyRepository,
+						   CongenitalDiseaseRepository congenitalDiseaseRepository,
+						   DrugAllergyHistoryRepository drugAllergyHistoryRepository) {
 		return args -> {
 			Stream.of("ผู้หญิง", "ผู้ชาย", "อื่นๆ").forEach(sex -> {
 				Gender gender = new Gender();

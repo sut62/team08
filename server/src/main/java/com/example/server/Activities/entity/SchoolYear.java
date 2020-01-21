@@ -16,7 +16,7 @@ public class SchoolYear {
     @Id
     @SequenceGenerator(name="SchoolYear_seq",sequenceName="SchoolYear_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SchoolYear_seq")
-    @Column(name = "SchoolYear_ID", unique = true, nullable = true)
+    @Column(name = "SchoolYear_ID", unique = true)
 
     private @NotNull Long yearid;
     private @NotNull Integer scyear;
