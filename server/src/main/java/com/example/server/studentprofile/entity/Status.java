@@ -2,6 +2,7 @@ package com.example.server.studentprofile.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -15,16 +16,16 @@ public class Status {
     @Id
     @SequenceGenerator(name="Status_seq",sequenceName="Status_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Status_seq")
-    @Column(name = "Status_ID", unique = true, nullable = true)
+    @Column(name = "Status_ID", unique = true)
 
-    private @NonNull long statusId;
-    private @NonNull String status;
+    private @NotNull Long statusId;
+    private @NotNull String status;
 
-	public long getStatusId() {
+	public Long getStatusId() {
 		return this.statusId;
 	}
 
-	public void setStatusId(long statusId) {
+	public void setStatusId(Long statusId) {
 		this.statusId = statusId;
 	}
 

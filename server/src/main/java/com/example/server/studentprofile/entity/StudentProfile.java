@@ -3,6 +3,9 @@ package com.example.server.studentprofile.entity;
 import lombok.*;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -10,30 +13,34 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name="StudentProfile")
+@Table(name = "StudentProfile")
 public class StudentProfile {
 
-    @Id
-    @SequenceGenerator(name="StudentProfile_seq",sequenceName="StudentProfile_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="StudentProfile_seq")
-    @Column(name = "StudentProfile_ID", unique = true, nullable = true)
+	@Id
+	@SequenceGenerator(name = "StudentProfile_seq", sequenceName = "StudentProfile_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "StudentProfile_seq")
+	@Column(name = "StudentProfile_ID", unique = true)
 
-    private @NonNull long studentproId;
-    private @NonNull String idnumber;
-    private @NonNull String namethai;
-    private @NonNull String nameeng;
-    private @NonNull String idcard;
-    private @NonNull Date brithday;
-    private @NonNull Integer age;
-    private @NonNull String blood;
-    private @NonNull String tel;
-    private @NonNull String address;
+	private @NotNull Long studentproId;
 
-	public long getStudentproId() {
+	@Pattern(regexp = "\\d{13}")
+	private @NotNull String idnumber;
+	private @NotNull String namethai;
+	private @NotNull String nameeng;
+	private @NotNull String idcard;
+	private @NotNull Date brithday;
+	private @NotNull Integer age;
+	private @NotNull String blood;
+
+	@Size(min = 10, max = 10)
+    private @NotNull String tel;
+	private @NotNull String address;
+
+	public Long getStudentproId() {
 		return this.studentproId;
 	}
 
-	public void setStudentproId(long studentproId) {
+	public void setStudentproId(Long studentproId) {
 		this.studentproId = studentproId;
 	}
 
@@ -109,19 +116,17 @@ public class StudentProfile {
 		this.address = address;
 	}
 
-    
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
+	@JoinColumn(name = "Gender_ID", insertable = true)
+	private Gender gender;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
-    @JoinColumn(name = "Gender_ID", insertable = true)
-    private Gender gender;
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Major.class)
+	@JoinColumn(name = "Major_ID", insertable = true)
+	private Major major;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Major.class)
-    @JoinColumn(name = "Major_ID", insertable = true)
-    private Major major;
-
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
-    @JoinColumn(name = "Status_ID", insertable = true)
-    private Status status;
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
+	@JoinColumn(name = "Status_ID", insertable = true)
+	private Status status;
 
 	public Gender getGender() {
 		return this.gender;
@@ -131,7 +136,6 @@ public class StudentProfile {
 		this.gender = gender;
 	}
 
-
 	public Major getMajor() {
 		return this.major;
 	}
@@ -139,8 +143,6 @@ public class StudentProfile {
 	public void setMajor(Major major) {
 		this.major = major;
 	}
-
-
 
 	public Status getStatus() {
 		return this.status;
@@ -150,6 +152,4 @@ public class StudentProfile {
 		this.status = status;
 	}
 
-
-	
 }
