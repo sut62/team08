@@ -2,6 +2,7 @@ package com.example.server.studentprofile.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -15,10 +16,10 @@ public class Major {
     @Id
     @SequenceGenerator(name="Major_seq",sequenceName="Major_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Major_seq")
-    @Column(name = "Major_ID", unique = true, nullable = true)
+    @Column(name = "Major_ID", unique = true)
 
-    private @NonNull Long majorId;
-    private @NonNull String major;
+    private @NotNull Long majorId;
+    private @NotNull String major;
 
 	public Long getMajorId() {
 		return this.majorId;
