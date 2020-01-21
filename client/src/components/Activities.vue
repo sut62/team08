@@ -82,7 +82,7 @@
                   label="กรุณาป้อนชื่อกิจกรรม/โครงการ"
                   outlined
                   type="text"
-                  v-model="activities.actname"
+                  v-model="activities."
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
