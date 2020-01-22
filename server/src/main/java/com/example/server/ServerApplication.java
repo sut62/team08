@@ -1,4 +1,4 @@
-package com.example.server;
+﻿package com.example.server;
 
 import com.example.server.studentprofile.entity.*;
 import com.example.server.studentprofile.repository.*;
@@ -14,15 +14,19 @@ import com.example.server.Scholarship.repository.ScholarshipTypeRepository;
 import com.example.server.StudentHealthRecord.entity.CongenitalDisease;
 import com.example.server.StudentHealthRecord.entity.DrugAllergyHistory;
 import com.example.server.StudentHealthRecord.repository.*;
+import com.example.server.Activities.entity.Institution;
+import com.example.server.Activities.entity.SchoolYear;
+import com.example.server.Activities.repository.InstitutionRepository;
+import com.example.server.Activities.repository.SchoolYearRepository;
+import com.example.server.Activities.repository.ActivitiesRepository;
 import com.example.server.FinancialInfo.entity.*;
-import com.example.server.activities.entity.*;
-import com.example.server.activities.repository.*;
 import com.example.server.studentprofile.repository.GenderRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -75,6 +79,11 @@ public class ServerApplication {
 			s.setNamethai("ทดสอบ ชื่อ");
 			s.setIdcard("B60XXXXX");
 			s.setIdnumber("1234567890123");
+			s.setAddress("address");
+			s.setAge(22);
+			s.setBrithday(new Date());
+			s.setBlood("AB");
+			s.setTel("0834567890");
 			studentprofileRepository.save(s);
 
 			Stream.of("เล่นการพนัน", "ขโมยทรัพย์สิน", "ทำร้ายร่างกาย", "ทุจริต", "วินัยจราจร").forEach(ruleType -> {
