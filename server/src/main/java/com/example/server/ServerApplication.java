@@ -1,4 +1,4 @@
-﻿package com.example.server;
+package com.example.server;
 
 import com.example.server.studentprofile.entity.*;
 import com.example.server.studentprofile.repository.*;
