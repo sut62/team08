@@ -1,6 +1,7 @@
 package com.example.server.FinancialInfo.entity;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -16,8 +17,8 @@ public class MoneyFormParent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MoneyFormParent_seq")
     @Column(name = "MoneyFormParent_ID")
 
-    private @NonNull Long moneyparentId;
-    private @NonNull String parent;
+    private @NotNull Long moneyparentId;
+    private @NotNull String parent;
 
     public Long getMoneyparentId() {
         return this.moneyparentId;

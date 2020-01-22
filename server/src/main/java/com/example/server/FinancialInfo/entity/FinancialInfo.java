@@ -2,6 +2,7 @@ package com.example.server.FinancialInfo.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.example.server.studentprofile.entity.StudentProfile;
 
@@ -19,10 +20,10 @@ public class FinancialInfo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FinancialInfo_seq")
     @Column(name = "FinancialInfo_ID")
 
-    private @NonNull Long finanId;
-    private @NonNull Long academicy;
-    private @NonNull Long houseincome;
-    private @NonNull String notenough;
+    private @NotNull Long finanId;
+    private @NotNull Long academicy;
+    private @NotNull Long houseincome;
+    private @NotNull String notenough;
 
     public Long getFinanId() {
         return this.finanId;
