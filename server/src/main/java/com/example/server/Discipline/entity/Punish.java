@@ -2,6 +2,7 @@ package com.example.server.Discipline.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -17,8 +18,8 @@ public class Punish {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Punish_seq")
     @Column(name = "Punish_ID")
 
-    private @NonNull Long punishId;
-    private @NonNull String punishType;
+    private @NotNull Long punishId;
+    private @NotNull String punishType;
 
     public Long getPunishId() {
         return this.punishId;

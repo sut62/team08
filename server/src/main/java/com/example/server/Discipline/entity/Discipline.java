@@ -2,6 +2,9 @@ package com.example.server.Discipline.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.example.server.studentprofile.entity.StudentProfile;
 
@@ -19,11 +22,16 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Discipline_seq")
     @Column(name = "Discipline_ID")
 
-    private @NonNull Long disciplineId;
-    private @NonNull Long schoolyear;
-    private @NonNull Long point;
-    private @NonNull String since;
-    private @NonNull String until;
+    private @NotNull Long disciplineId;
+
+    @Pattern(regexp = "\\d{4}")
+    private @NotNull Long schoolyear;
+    private @NotNull Long point;
+
+    @Size(min = 4, max = 10)
+    private @NotNull String since;
+    @Size(min = 4, max = 10)
+    private @NotNull String until;
 
     public Long getDisciplineId() {
         return this.disciplineId;

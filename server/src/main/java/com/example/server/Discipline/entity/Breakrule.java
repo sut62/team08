@@ -2,6 +2,7 @@ package com.example.server.Discipline.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -17,8 +18,8 @@ public class Breakrule {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Breakrule_seq")
     @Column(name = "Breakrule_ID")
 
-    private @NonNull Long ruleId;
-    private @NonNull String ruleType;
+    private @NotNull Long ruleId;
+    private @NotNull String ruleType;
 
     public Long getRuleId() {
         return this.ruleId;
