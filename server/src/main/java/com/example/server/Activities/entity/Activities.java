@@ -1,4 +1,4 @@
-package com.example.server.activities.entity;
+package com.example.server.Activities.entity;
 
 import lombok.*;
 import javax.persistence.*;
@@ -72,8 +72,8 @@ public class Activities {
         return this.schoolyear;
     }
 
-    public void setSchoolyear(SchoolYear schoolyear) {
-        this.schoolyear = schoolyear;
+    public void setSchoolyear(SchoolYear schoolyears) {
+        this.schoolyear = schoolyears;
     }
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Institution.class)
