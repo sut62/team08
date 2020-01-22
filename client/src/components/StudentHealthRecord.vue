@@ -42,16 +42,7 @@
                 required
               ></v-select>
 
-              <v-select
-                label="กรุณาเลือกสาขาวิชา"
-                outlined
-                v-model="studenthealthRecord.majorId"
-                :items="majors"
-                item-text="major"
-                item-value="majorId"
-                :rules="[(v) => !!v || 'Item is required']"
-                required
-              ></v-select>
+
 
               <v-select
                 label="กรุณาเลือกประวัติการแพ้ยา"
@@ -117,7 +108,6 @@ export default {
     return {
       studenthealthRecord: {
         studentproId: "",
-        majorId: "",
         weights: "",
         heights: "",
         congenitaldiseasesId: "",
@@ -128,7 +118,6 @@ export default {
       valid: false,
       student: [],
       drugallergyhistory: [],
-      majors: [],
       congenitalDisease: []
     }
   },
@@ -166,24 +155,13 @@ export default {
           console.log(e)
         })
     },
-    getMajors() {
-      http
-        .get("/major")
-        .then(response => {
-          this.majors = response.data
-          console.log(response.data)
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    },
+
     saveStudentHealthRecord() {
       http
         .post(
           "/StudentHealthRecord/" +
             this.studenthealthRecord.studentproId +
-            "/" +
-            this.studenthealthRecord.majorId +
+
             "/" +
             this.studenthealthRecord.weights +
             "/" +
@@ -214,14 +192,12 @@ export default {
     refreshList() {
       this.getStudentIds()
       this.getDrugallergyhistorys()
-      this.getMajors()
       this.getCongenitalDisease()
     }
   },
   mounted() {
     this.getStudentIds()
     this.getDrugallergyhistorys()
-    this.getMajors()
     this.getCongenitalDisease()
   }
 }
