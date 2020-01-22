@@ -25,20 +25,18 @@ public class StudentHealthRecordController {
     private StudentHealthRecordRepository studentHealthRecordRepository;
     @Autowired
     private StudentProfileRepository studentProfileRepository;
-    @Autowired
-    private MajorRepository majorRepository;
+
     @Autowired
     private CongenitalDiseaseRepository congenitalDiseaseRepository;
     @Autowired
     private DrugAllergyHistoryRepository drugAllergyHistoryRepository;
 
     StudentHealthRecordController(StudentHealthRecordRepository studentHealthRecordRepository,
-            StudentProfileRepository studentProfileRepository, MajorRepository majorRepository,
+            StudentProfileRepository studentProfileRepository,
             DrugAllergyHistoryRepository drugAllergyHistoryRepository,
             CongenitalDiseaseRepository congenitalDiseaseRepository) {
         this.studentHealthRecordRepository = studentHealthRecordRepository;
         this.studentProfileRepository = studentProfileRepository;
-        this.majorRepository = majorRepository;
         this.drugAllergyHistoryRepository = drugAllergyHistoryRepository;
         this.congenitalDiseaseRepository = congenitalDiseaseRepository;
     }
@@ -48,8 +46,8 @@ public class StudentHealthRecordController {
         return studentHealthRecordRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("StudentHealthRecord/{studentproId}/{majorid}/{weight}/{heigth}/{congenitaldiseaseid}/{drugallergyid}")
-    public StudentHealthRecord newStudentHealthRecord(@PathVariable long studentproId, @PathVariable long majorid,
+    @PostMapping("StudentHealthRecord/{studentproId}/{weight}/{heigth}/{congenitaldiseaseid}/{drugallergyid}")
+    public StudentHealthRecord newStudentHealthRecord(@PathVariable long studentproId,
             @PathVariable long drugallergyid, @PathVariable long congenitaldiseaseid, @PathVariable Integer weight,
             @PathVariable Integer heigth) {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
@@ -58,9 +56,6 @@ public class StudentHealthRecordController {
 
         StudentProfile studentprofiles = studentProfileRepository.findById(studentproId);
         studentHealthRecord.setStudentprofile(studentprofiles);
-
-        Major major = majorRepository.findById(majorid);
-        studentHealthRecord.setMajor(major);
 
         CongenitalDisease congenitaldisease = congenitalDiseaseRepository.findById(congenitaldiseaseid);
         studentHealthRecord.setCongenitaldisease(congenitaldisease);
