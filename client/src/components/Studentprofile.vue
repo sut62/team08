@@ -36,7 +36,7 @@
                   label="กรุณาป้อนรหัสนักศึกษา"
                   outlined
                   type="String"
-                  v-model="Studentprofile.idnumber"
+                  v-model="Studentprofile.idcard"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
@@ -74,7 +74,7 @@
                   label="กรุณาป้อนเลขบัตรประชาชน"
                   outlined
                   type
-                  v-model="Studentprofile.idcard"
+                  v-model="Studentprofile.idnumber"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
