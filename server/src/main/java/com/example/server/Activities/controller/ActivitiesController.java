@@ -1,4 +1,4 @@
-package com.example.server.activities.controller;
+package com.example.server.Activities.controller;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import com.example.server.studentprofile.entity.*;
 import com.example.server.studentprofile.repository.*;
-import com.example.server.activities.entity.*;
-import com.example.server.activities.repository.*;
+import com.example.server.Activities.entity.*;
+import com.example.server.Activities.repository.*;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
