@@ -27,6 +27,6 @@ public class CongenitalDiseaseController {
     public Collection<CongenitalDisease> congenitalDiseases(){
         return congenitalDiseaseRepository.findAll().stream().collect(Collectors.toList())  ;
     }
-   
-    
+
+
 }
