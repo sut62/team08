@@ -2,6 +2,7 @@ package com.example.server.FinancialInfo.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -17,8 +18,8 @@ public class SpendMoney {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SpendMoney_seq")
     @Column(name = "SpendMoney_ID")
 
-    private @NonNull Long spendId;
-    private @NonNull String usemoney;
+    private @NotNull Long spendId;
+    private @NotNull String usemoney;
 
     public Long getSpendId() {
         return this.spendId;
