@@ -47,7 +47,7 @@ public class StudentProfileController {
     // @GetMapping("/studentprofile/{majorId}/{birthday}/genderId}/{statusId}")
     @PostMapping("/studentprofile/{majorId}/{birthday}/{genderId}/{statusId}/{idnumber}/{namethai}/{nameeng}/{idcard}/{age}/{blood}/{tel}/{address}")
 
-    public void newPay(@PathVariable long majorId, @PathVariable long genderId, @PathVariable long statusId,
+    public void newStudentProfile(@PathVariable long majorId, @PathVariable long genderId, @PathVariable long statusId,
             @PathVariable String blood, @PathVariable String address, @PathVariable String idnumber,
             @PathVariable String namethai, @PathVariable String nameeng, @PathVariable String idcard,
             @PathVariable String tel, @PathVariable Integer age,
@@ -65,6 +65,7 @@ public class StudentProfileController {
         studentprofiles.setIdnumber(idnumber);
         studentprofiles.setNameeng(nameeng);
         studentprofiles.setNamethai(namethai);
+        
         Gender genders = genderRepository.findById(genderId);
         studentprofiles.setGender(genders);
 
