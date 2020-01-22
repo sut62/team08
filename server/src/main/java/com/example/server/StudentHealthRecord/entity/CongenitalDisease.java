@@ -25,7 +25,7 @@ public class CongenitalDisease {
     public void setCongenitaldiseaseid(Long congenitaldiseaseid) {
         this.congenitaldiseaseid = congenitaldiseaseid;
     }
-    
+
 
     public String getCongenitaldisease() {
         return this.congenitaldisease;
@@ -35,6 +35,6 @@ public class CongenitalDisease {
         this.congenitaldisease = congenitaldisease;
     }
 
-    
+
 
 }

@@ -45,18 +45,6 @@ public class StudentHealthRecord {
         this.height = height;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Major.class)
-    @JoinColumn(name = "MAJOR_ID")
-    private Major major;
-
-    public Major getMajor() {
-        return this.major;
-    }
-
-    public void setMajor(Major major) {
-        this.major = major;
-    }
-
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "StudentProfile_ID")
     private StudentProfile studentprofile;
