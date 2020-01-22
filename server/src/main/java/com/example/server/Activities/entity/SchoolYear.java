@@ -1,4 +1,4 @@
-package com.example.server.activities.entity;
+package com.example.server.Activities.entity;
 
 import lombok.*;
 import javax.persistence.*;
