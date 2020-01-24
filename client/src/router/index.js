@@ -11,6 +11,7 @@ import Scholarship from "../components/Scholarship";
 import DisciplineView from "../components/DisciplineView";
 import FinancialView from "../components/FinancialView"
 import Graduates from "../components/Graduates";
+import ActivitiesView from "../components/ActivitiesView";
 Vue.use(Router);
 
 export default new Router({
@@ -72,6 +73,12 @@ export default new Router({
       path: "/graduates",
       name: "graduates",
       component: Graduates
+      },
+
+      {
+        path: "/activitiesview",
+        name: "activitiesview",
+        component: ActivitiesView
       }
     ]
   });
