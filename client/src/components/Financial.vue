@@ -111,6 +111,7 @@
       <v-row justify="center">
         <v-btn @click="saveFinancialInfo" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
         <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+        <v-btn style="margin-left: 15px;" @click="viewdata">viewdata</v-btn>
       </v-row>
       <br />
     </div>
@@ -140,6 +141,9 @@ export default {
     }
   },
   methods: {
+    viewdata() {
+        this.$router.push("/financialview")
+    },
     clear() {
       (this.financialinfo.studentproId = ""),
         (this.financialinfo.academicy = ""),
@@ -175,6 +179,7 @@ export default {
           console.log(response.data)
           if (response.data) {
             alert("บันทึกข้อมูลสำเร็จ")
+            this.$router.push("/financialview");
           } else {
             alert("บันทึกข้อมูลไม่สำเร็จ")
           }
