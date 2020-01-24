@@ -1,0 +1,237 @@
+  <template>
+  <v-app>
+    <v-app-bar app dark class="indigo">
+      <v-toolbar-title class="headline text-uppercase">
+        <span>System : </span>
+        <span class="font-weight-light">Graduates</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn class="ma-2" text icon color="lighten-2" :to="{name: 'home'}">
+        <span class="mr-2">
+          <v-icon large>home</v-icon>
+        </span>
+      </v-btn>
+    </v-app-bar>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div>
+      <v-layout text-center wrap>
+        <v-flex mb-4>
+          <br />
+          <h1 class="display-2 font-weight-bold mb-3">Graduates</h1>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    <div>
+      <v-row justify="center">
+        <v-col cols="7">
+          <v-form v-model="valid" ref="form">
+            <v-row justify="center">
+              <v-col cols="6">
+                <v-select
+                  label="กรุณาเลือกชื่อนักศึกษา"
+                  outlined
+                  v-model="graduates.studentId"
+                  :items="students"
+                  item-text="namethai"
+                  item-value="studentproId"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+
+                <v-select
+                  label="กรุณาเลือกปีการศึกษา"
+                  outlined
+                  v-model="graduates.yearid"
+                  :items="schoolyears"
+                  item-text="scyear"
+                  item-value="yearid"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+
+                <v-select
+                  label="กรุณาเลือกสำเร็จการศึกษาระดับ"
+                  outlined
+                  v-model="graduates.educaId"
+                  :items="educationlevels"
+                  item-text="educalevel"
+                  item-value="educaId"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-select>
+
+                <v-row>
+                  <v-col>
+                    <v-menu
+                      v-model="menu1"
+                      :close-on-content-click="false"
+                      full-width
+                      max-width="290"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          :value="computedDateFormattedMomentjs"
+                          clearable
+                          label="วัน/เดือน/ปี แจ้งจบ"
+                          readonly
+                          prepend-icon=" "
+                          v-on="on"
+                          locale="th"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker locale="th" v-model="graduates.graduadate" @change="menu1 = false"></v-date-picker>
+                    </v-menu>
+                  </v-col>
+                </v-row>
+
+                <v-text-field
+                  label="กรุณาป้อนเกียรตินิยม"
+                  outlined
+                  type="text"
+                  v-model="graduates.honor"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  label="กรุณาป้อนความประสงค์เข้ารับปริญญาบัตร"
+                  outlined
+                  type="text"
+                  v-model="graduates.graduation"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-text-field>
+
+
+                
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-btn @click="saveGraduates" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
+        <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+      </v-row>
+      <br />
+    </div>
+  </v-app>
+</template>
+
+<script>
+import http from "../http-common"
+import moment from "moment" ////////////////ใส่นี่อีกวันที่/////////////////////////////////
+
+export default {
+  computed: {
+    computedDateFormattedMomentjs() {
+      return this.graduates.graduadate
+        ? moment(this.graduates.graduadate).format("dddd Do, MMMM YYYY")
+        : ""
+    }
+  },
+  name: "graduates",
+  data() {
+    return {
+      graduates: {
+        yearid: "",
+        studentId: "",
+        educaId: "",
+        graduadate: "",
+        honor: "",
+        graduation: ""
+      },
+      schoolyears: [],
+      educationlevels: [],
+      students: [],
+      submitted: false,
+      valid: false,
+      menu1: false
+    }
+  },
+  methods: {
+    getEducationlevels() {
+      http
+        .get("/educationlevel")
+        .then(response => {
+          this.educationlevels = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    getSchoolYears() {
+      http
+        .get("/schoolyear")
+        .then(response => {
+          this.schoolyears = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    getStudents() {
+      http
+        .get("/student")
+        .then(response => {
+          this.students = response.data
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    saveGraduates() {
+      http
+        .post(
+          "/graduates/" +
+            this.graduates.studentId +
+            "/" +
+            this.graduates.yearid +
+            "/" +
+            this.graduates.educaId +
+            "/" +
+            this.graduates.graduadate +
+            "/" +
+            this.graduates.honor +
+            "/" +
+            this.graduates.graduation,
+          this.graduates
+        )
+        .then(response => {
+          console.log(response.data)
+          if (response.data) {
+            alert("บันทึกสำเร็จ")
+          } else {
+            alert("บันทึกไม่สำเร็จ")
+          }
+        })
+        .catch(e => {
+          alert("บันทึกไม่สำเร็จ")
+          console.log(e)
+        })
+    },
+    clear() {
+      this.$refs.form.reset()
+    },
+    refreshList() {
+      this.getEducationlevels()
+      this.getSchoolYears()
+      this.getStudents()
+    }
+    /* eslint-enable no-console */
+  },
+  mounted() {
+    this.getEducationlevels()
+    this.getSchoolYears()
+    this.getStudents()
+  }
+}
+</script>
