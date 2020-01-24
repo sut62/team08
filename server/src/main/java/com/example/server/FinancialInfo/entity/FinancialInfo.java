@@ -3,6 +3,8 @@ package com.example.server.FinancialInfo.entity;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import com.example.server.studentprofile.entity.StudentProfile;
 
@@ -21,8 +23,11 @@ public class FinancialInfo {
     @Column(name = "FinancialInfo_ID")
 
     private @NotNull Long finanId;
-    private @NotNull Long academicy;
-    private @NotNull Long houseincome;
+    @Pattern(regexp = "\\d{4}")
+    private @NotNull String academicy;
+    @Size(min = 5, max = 10)
+    private @NotNull String houseincome;
+    @Size(min = 2, max = 20)
     private @NotNull String notenough;
 
     public Long getFinanId() {
@@ -33,19 +38,19 @@ public class FinancialInfo {
         this.finanId = finanId;
     }
 
-    public Long getAcademicy() {
+    public String getAcademicy() {
         return this.academicy;
     }
 
-    public void setAcademicy(Long academicy) {
+    public void setAcademicy(String academicy) {
         this.academicy = academicy;
     }
 
-    public Long getHouseincome() {
+    public String getHouseincome() {
         return this.houseincome;
     }
 
-    public void setHouseincome(Long houseincome) {
+    public void setHouseincome(String houseincome) {
         this.houseincome = houseincome;
     }
 
