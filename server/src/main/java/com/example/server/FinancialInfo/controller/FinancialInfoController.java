@@ -47,8 +47,8 @@ public class FinancialInfoController {
 
     @PostMapping("/financialinfo/{studentproId}/{academicy}/{moneyparentId}/{houseincome}/{spendId}/{levelId}/{notenough}")
     public FinancialInfo newFinancialInfo(
-            @PathVariable long studentproId, @PathVariable long academicy, @PathVariable long moneyparentId,
-            @PathVariable long houseincome, @PathVariable long spendId, @PathVariable long levelId,
+            @PathVariable long studentproId, @PathVariable String academicy, @PathVariable long moneyparentId,
+            @PathVariable String houseincome, @PathVariable long spendId, @PathVariable long levelId,
             @PathVariable String notenough)
     {
         FinancialInfo financialinfo = new FinancialInfo();
