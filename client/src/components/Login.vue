@@ -52,10 +52,15 @@ export default {
         login: require("../assets/users.png")
       },
       redirect: [
-        {
+         {
           username: "aif",
           password: "1811",
           path: "/studentprofile"
+        },
+        {
+          username: "nc",
+          password: "1414",
+          path: "/graduates"
         },
         {
           username: "may",
