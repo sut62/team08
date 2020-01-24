@@ -41,7 +41,7 @@ public class DisciplineController {
     }
 
     @PostMapping("/discipline/{studentproId}/{schoolyear}/{ruleId}/{point}/{punishId}/{since}/{until}")
-    public Discipline newDiscipline(@PathVariable long studentproId, @PathVariable long schoolyear,
+    public Discipline newDiscipline(@PathVariable long studentproId, @PathVariable String schoolyear,
             @PathVariable long ruleId, @PathVariable long point, @PathVariable long punishId,
             @PathVariable String since, @PathVariable String until) {
         Discipline discipline = new Discipline();
