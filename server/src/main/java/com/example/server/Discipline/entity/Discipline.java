@@ -25,12 +25,12 @@ public class Discipline {
     private @NotNull Long disciplineId;
 
     @Pattern(regexp = "\\d{4}")
-    private @NotNull Long schoolyear;
+    private @NotNull String schoolyear;
     private @NotNull Long point;
 
     @Size(min = 4, max = 10)
     private @NotNull String since;
-    @Size(min = 4, max = 10)
+    
     private @NotNull String until;
 
     public Long getDisciplineId() {
@@ -41,11 +41,11 @@ public class Discipline {
         this.disciplineId = disciplineId;
     }
 
-    public Long getSchoolyear() {
+    public String getSchoolyear() {
         return this.schoolyear;
     }
 
-    public void setSchoolyear(Long schoolyear) {
+    public void setSchoolyear(String schoolyear) {
         this.schoolyear = schoolyear;
     }
 
