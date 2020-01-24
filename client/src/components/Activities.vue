@@ -114,6 +114,7 @@
       <v-row justify="center">
         <v-btn @click="saveActivities" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
         <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+        <v-btn style="margin-left: 15px;" color="indigo" dark v-on:click="activitiesview">View Activities</v-btn>
       </v-row>
       <br />
     </div>
@@ -151,6 +152,9 @@ export default {
     }
   },
   methods: {
+    activitiesview() {
+        this.$router.push("/activitiesview")
+    },
     getInstitutions() {
       http
         .get("/institution")
@@ -203,10 +207,16 @@ export default {
           this.activities
         )
         .then(response => {
-          console.log(response)
-          alert("บันทึกข้อมมูลสำเร็จ")
+          console.log(response.data)
+          if (response.data) {
+            alert("บันทึกสำเร็จ")
+             this.$router.push("/activitiesview");
+          } else {
+            alert("บันทึกไม่สำเร็จ")
+          }
         })
         .catch(e => {
+          alert("บันทึกไม่สำเร็จ")
           console.log(e)
         })
       this.submitted = true
