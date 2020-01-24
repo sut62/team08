@@ -3,7 +3,7 @@
     <v-app-bar app dark class="indigo">
       <v-toolbar-title class="headline text-uppercase">
         <span>System :</span>
-        <span class="font-weight-light">Discipline</span>
+        <span class="font-weight-light">DISCIPLINE</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn class="ma-2" text icon color="lighten-2" :to="{name: 'home'}">
@@ -21,10 +21,14 @@
       <v-layout text-center wrap>
         <v-flex mb-4>
           <br />
-          <h1 class="display-2 font-weight-bold mb-3">Discipline</h1>
+          <h1 class="display-2 font-weight-bold mb-3">DISCIPLINE</h1>
         </v-flex>
       </v-layout>
     </div>
+    
+    <v-row justify="center">
+        <v-btn style="margin-left: 15px;" color="indigo"  v-on:click="disciplineview">View Discipline</v-btn>
+      </v-row>
 
     <div>
       <v-row justify="center">
@@ -140,6 +144,9 @@ export default {
     }
   },
   methods: {
+    disciplineview() {
+      this.$router.push("/disciplineview")
+    },
     clear() {
       this.discipline.studentproId = ""
       this.discipline.schoolyear = ""
@@ -172,7 +179,7 @@ export default {
           console.log(response.data)
           if (response.data) {
             alert("บันทึกสำเร็จ")
-            // this.$router.push("/view");
+            this.$router.push("/disciplineview");
           } else {
             alert("บันทึกไม่สำเร็จ")
           }
