@@ -31,6 +31,7 @@ public class Discipline {
     @Size(min = 4, max = 10)
     private @NotNull String since;
     
+    @Size(min = 4, max = 10)
     private @NotNull String until;
 
     public Long getDisciplineId() {
