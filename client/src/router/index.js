@@ -9,6 +9,7 @@ import Financial from "../components/Financial";
 import StudentHealthRecord from "../components/StudentHealthRecord";
 import Scholarship from "../components/Scholarship";
 import DisciplineView from "../components/DisciplineView";
+import FinancialView from "../components/FinancialView"
 Vue.use(Router);
 
 export default new Router({
@@ -60,6 +61,11 @@ export default new Router({
       path: "/disciplineview",
       name: "disciplineview",
       component: DisciplineView
+    },
+    {
+      path: "/financialview",
+      name: "financialview",
+      component: FinancialView
     }
   ]
 });
