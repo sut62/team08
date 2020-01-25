@@ -34,7 +34,7 @@ public class DrugAllergyHistoryTest {
     }
 
     @Test
-    void testCreateDrugAllergyHistoryOK() {
+    void B5828104_testCreateDrugAllergyHistoryOK() {
         DrugAllergyHistory drugAllergyHistory = new DrugAllergyHistory();
         drugAllergyHistory.setDrugallergyhistoryid(1L);
         drugAllergyHistory.setDrugallergyhistory("ยาคลายกล้ามเนื้อ");
@@ -45,7 +45,7 @@ public class DrugAllergyHistoryTest {
     }
 
     @Test 
-    void testDrugAllergyHistoryIdMustNotBeNull() {
+    void B5828104_testDrugAllergyHistoryIdMustNotBeNull() {
         DrugAllergyHistory drugAllergyHistory = new DrugAllergyHistory();
         drugAllergyHistory.setDrugallergyhistoryid(null);
         drugAllergyHistory.setDrugallergyhistory("ยาคลายกล้ามเนื้อ");
@@ -61,7 +61,7 @@ public class DrugAllergyHistoryTest {
 
 
     @Test 
-    void testDrugAllergyHistoryMustNotBeNull() {
+    void B5828104_testDrugAllergyHistoryMustNotBeNull() {
         DrugAllergyHistory drugAllergyHistory = new DrugAllergyHistory();
         drugAllergyHistory.setDrugallergyhistoryid(1L);
         drugAllergyHistory.setDrugallergyhistory(null);
