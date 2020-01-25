@@ -34,7 +34,7 @@ public class WorkStatusTest {
     }
 
     @Test 
-    void testCreateWorkStatusOK() {
+    void B5828104_testCreateWorkStatusOK() {
         WorkStatus workStatus = new WorkStatus();
         workStatus.setWorkstatusId(1L);
         workStatus.setStatus("ทำงานแล้ว");
@@ -46,7 +46,7 @@ public class WorkStatusTest {
     }
 
     @Test 
-    void testWorkStatusIdMustNotBeNull() {
+    void B5828104_testWorkStatusIdMustNotBeNull() {
         WorkStatus workStatus = new WorkStatus();
         workStatus.setWorkstatusId(null);
         workStatus.setStatus("ทำงานแล้ว");
@@ -62,7 +62,7 @@ public class WorkStatusTest {
 
 
     @Test 
-    void testStatusMustNotBeNull() {
+    void B5828104_testStatusMustNotBeNull() {
         WorkStatus workStatus = new WorkStatus();
         workStatus.setWorkstatusId(1L);
         workStatus.setStatus(null);
