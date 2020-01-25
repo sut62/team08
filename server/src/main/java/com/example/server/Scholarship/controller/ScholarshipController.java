@@ -44,7 +44,7 @@ public class ScholarshipController {
     
     @PostMapping("/scholarship/{scholarshipTypeid}/{studentproId}/{officerid}/{money}/{paydate}")
     public Scholarship newScholarship(@PathVariable long scholarshipTypeid, @PathVariable long studentproId,
-            @PathVariable long officerid, @PathVariable Integer money,
+            @PathVariable long officerid, @PathVariable String money,
             @PathVariable("paydate") @DateTimeFormat(pattern = "yyyy-mm-dd") Date paydate)
 
     {
