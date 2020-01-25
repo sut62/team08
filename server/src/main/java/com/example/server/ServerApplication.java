@@ -7,6 +7,11 @@ import com.example.server.Discipline.entity.Punish;
 import com.example.server.Discipline.repository.BreakruleRepository;
 import com.example.server.Discipline.repository.PunishRepository;
 import com.example.server.FinancialInfo.repository.*;
+import com.example.server.GraduateEmployment.entity.WorkStatus;
+import com.example.server.GraduateEmployment.repository.WorkStatusRepository;
+import com.example.server.Graduates.entity.EducationLevel;
+import com.example.server.Graduates.repository.GraduatesRepository;
+import com.example.server.Graduates.repository.EducationLevelRepository;
 import com.example.server.Scholarship.entity.ScholarshipOfficer;
 import com.example.server.Scholarship.entity.ScholarshipType;
 import com.example.server.Scholarship.repository.ScholarshipOfficerRepository;
@@ -44,8 +49,10 @@ public class ServerApplication {
 						   ScholarshipOfficerRepository scholarshipOfficerRepository, SchoolYearRepository schoolyearRepository,
 						   LevelofUseRepository levelofuseRepository, ScholarshipTypeRepository scholarshipTypeRepository,
 						   MoneyFormParentRepository moneyformparentRepository, SpendMoneyRepository spendmoneyRepository,
-						   CongenitalDiseaseRepository congenitalDiseaseRepository,
-						   DrugAllergyHistoryRepository drugAllergyHistoryRepository) {
+						   CongenitalDiseaseRepository congenitalDiseaseRepository, WorkStatusRepository workstatusRepository,
+						   DrugAllergyHistoryRepository drugAllergyHistoryRepository,
+						   EducationLevelRepository educationlevelRepository,
+						   GraduatesRepository graduatesRepository) {
 		return args -> {
 			Stream.of("ผู้หญิง", "ผู้ชาย", "อื่นๆ").forEach(sex -> {
 				Gender gender = new Gender();
@@ -73,6 +80,13 @@ public class ServerApplication {
 				institution.setInsname(ins);
 				institutionRepository.save(institution);
 			});
+
+			Stream.of("ปริญญาตรี", "ปริญญาโท","ปริญญาเอก").forEach(edu -> {
+				EducationLevel educationlevel = new EducationLevel();
+				educationlevel.setEducalevel(edu);
+				educationlevelRepository.save(educationlevel);
+			});
+
 
 			StudentProfile s = new StudentProfile();
 			s.setNameeng("Test Name");
@@ -140,6 +154,12 @@ public class ServerApplication {
 				ScholarshipOfficer scholarshipOfficer = new ScholarshipOfficer();
 				scholarshipOfficer.setOfficername(officer);
 				scholarshipOfficerRepository.save(scholarshipOfficer);
+			});
+
+			Stream.of("ทำงานแล้ว","ทำงานแล้วและกำลังศึกษาต่อ", "กำลังศึกษาต่อ", "ยังไม่ได้ทำงานและไม่ได้ศึกษาต่อ").forEach(status -> {
+				WorkStatus workstatus = new WorkStatus();
+				workstatus.setStatus(status);
+				workstatusRepository.save(workstatus);
 			});
 		};
 	}
