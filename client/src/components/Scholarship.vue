@@ -3,7 +3,7 @@
     <v-app-bar app dark class="red">
       <v-toolbar-title class="headline text-uppercase">
         <span>System :</span>
-        <span class="font-weight-light">scholarship</span>
+        <span class="font-weight-light">Scholarship</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn class="ma-2" text icon color="lighten-2" :to="{name: 'home'}">
@@ -43,7 +43,7 @@
                   required
                 ></v-select>
                 <v-select
-                  label="กรุณาเลือกปรเภททุนการศึกษา"
+                  label="กรุณาเลือกประเภททุนการศึกษา"
                   outlined
                   v-model="scholarship.scholarshipTypeId"
                   :items="scholarshiptypes"
@@ -60,8 +60,6 @@
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
-
-
                 <v-select
                   label="กรุณาเลือกเจ้าหน้าที่ งานทุน"
                   outlined
@@ -71,9 +69,7 @@
                   item-value="officerid"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
-                ></v-select>
-
-                
+                ></v-select>               
                 <v-menu v-model="menu1" :close-on-content-click="false" full-width max-width="290">
                   <template v-slot:activator="{ on }">
                     <v-text-field
@@ -96,6 +92,7 @@
       <v-row justify="center">
         <v-btn @click="savescholarship" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
         <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+        <v-btn style="margin-left: 15px;" color="indigo" dark v-on:click="scholarshipview">View Scholarship</v-btn>
       </v-row>
       <br />
     </div>
@@ -107,7 +104,6 @@ import http from "../http-common"
 import moment from "moment"
 
 export default {
-  name: "scholarship",
   computed: {
     computedDateFormattedMomentjs() {
       return this.scholarship.paydate
@@ -115,6 +111,7 @@ export default {
         : ""
     }
   },
+  name: "scholarship",
   data() {
     return {
       scholarship: {
@@ -129,8 +126,11 @@ export default {
       scholarshiptypes: [],
       menu1: false
     }
-  },
+  },    
   methods: {
+    scholarshipview() {
+        this.$router.push("/scholarshipview")
+    },
     clear() {
       this.scholarship.scholarshipTypeId = ""
       this.scholarship.studentproId = ""
@@ -152,12 +152,13 @@ export default {
             "/" +
             this.scholarship.money +
             "/" +
-            this.scholarship.paydate 
+            this.scholarship.paydate,
         )
         .then(response => {
           console.log(response.data)
           if (response.data) {
             alert("บันทึกสำเร็จ")
+             this.$router.push("/scholarshipview");
           } else {
             alert("บันทึกไม่สำเร็จ")
           }
@@ -167,7 +168,6 @@ export default {
           console.log(e)
         })
     },
-
     getStudentProfile() {
       http
         .get("/student")
@@ -179,7 +179,6 @@ export default {
           console.log(e)
         })
     },
-
     getScholarshipOfficers() {
       http
         .get("/scholarshipOfficers")
@@ -191,7 +190,6 @@ export default {
           console.log(e)
         })
     },
-
     getScholarshipTypes() {
       http
         .get("/scholarshiptypes")
