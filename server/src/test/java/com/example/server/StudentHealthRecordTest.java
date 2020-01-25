@@ -34,7 +34,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testCreateStudentHealthRecordOK() {
+    void B5828104_testCreateStudentHealthRecordOK() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(180);
@@ -48,7 +48,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testStudentHealthRecordIdMustNotBeNull() {
+    void B5828104_testStudentHealthRecordIdMustNotBeNull() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(null);
         studentHealthRecord.setHeight(180);
@@ -65,7 +65,7 @@ public class StudentHealthRecordTest {
 
 
     @Test 
-    void testHeightMustNotBeNull() {
+    void B5828104_testHeightMustNotBeNull() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(null);
@@ -81,7 +81,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testWidthMustNotBeNull() {
+    void B5828104_testWidthMustNotBeNull() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(180);
@@ -97,7 +97,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testHeightMustNotLessThan100() {
+    void B5828104_testHeightMustNotLessThan100() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(99);
@@ -113,7 +113,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testHeightMustNotMoreThan220() {
+    void B5828104_testHeightMustNotMoreThan220() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(221);
@@ -129,7 +129,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testWeightMustNotLessThan30() {
+    void B5828104_testWeightMustNotLessThan30() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(180);
@@ -145,7 +145,7 @@ public class StudentHealthRecordTest {
     }
 
     @Test 
-    void testWeightMustNotMoreThan200() {
+    void B5828104_testWeightMustNotMoreThan200() {
         StudentHealthRecord studentHealthRecord = new StudentHealthRecord();
         studentHealthRecord.setStudentHealthRecordid(1L);
         studentHealthRecord.setHeight(180);
