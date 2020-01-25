@@ -67,6 +67,11 @@ export default {
           password: "1234",
           path: "/studenthealthrecord"
         },
+	{
+          username: "may1",
+          password: "1234",
+          path: "/graduateemployment"
+        },
         {
           username: "boom",
           password: "1234",
