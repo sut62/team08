@@ -34,7 +34,7 @@ public class CongenitalDiseaseTest {
     }
 
     @Test
-    void testCreateCongenitalDiseaseOK() {
+    void B5828104_testCreateCongenitalDiseaseOK() {
         CongenitalDisease congenitalDisease = new CongenitalDisease();
         congenitalDisease.setCongenitaldiseaseid(1L);
         congenitalDisease.setCongenitaldisease("โรคภูมิแพ้อากาศ");
@@ -47,7 +47,7 @@ public class CongenitalDiseaseTest {
     }
 
     @Test 
-    void testCongenitalDiseaseIdMustNotBeNull() {
+    void B5828104_testCongenitalDiseaseIdMustNotBeNull() {
         CongenitalDisease congenitalDisease = new CongenitalDisease();
         congenitalDisease.setCongenitaldiseaseid(null);
         congenitalDisease.setCongenitaldisease("โรคภูมิแพ้อากาศ");
@@ -63,7 +63,7 @@ public class CongenitalDiseaseTest {
 
 
     @Test 
-    void testCongenitalDiseaseMustNotBeNull() {
+    void B5828104_testCongenitalDiseaseMustNotBeNull() {
         CongenitalDisease congenitalDisease = new CongenitalDisease();
         congenitalDisease.setCongenitaldiseaseid(1L);
         congenitalDisease.setCongenitaldisease(null);
@@ -78,7 +78,7 @@ public class CongenitalDiseaseTest {
     }
 
     @Test 
-    void testCongenitalDiseaseMustNotLessThan5() {
+    void B5828104_testCongenitalDiseaseMustNotLessThan5() {
         CongenitalDisease congenitalDisease = new CongenitalDisease();
         congenitalDisease.setCongenitaldiseaseid(1L);
         congenitalDisease.setCongenitaldisease("โรค");
@@ -93,7 +93,7 @@ public class CongenitalDiseaseTest {
     }
 
     @Test 
-    void testCongenitalDiseaseMustNotMoreThan30() {
+    void B5828104_testCongenitalDiseaseMustNotMoreThan30() {
         CongenitalDisease congenitalDisease = new CongenitalDisease();
         congenitalDisease.setCongenitaldiseaseid(1L);
         congenitalDisease.setCongenitaldisease("โรคภูมิแพ้อากาศเป็นพิษเรื้อรัง ไม่สามารถรักษาให้หายขาดได้");
