@@ -1,6 +1,7 @@
 package com.example.server.Scholarship.entity;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -15,8 +16,8 @@ public class ScholarshipOfficer {
     @SequenceGenerator(name = "ScholarshipOfficer_seq", sequenceName = "ScholarshipOfficer_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ScholarshipOfficer_seq")
     @Column(name = "ScholarshipOfficer_ID")
-    private @NonNull Long officerid;
-    private @NonNull String officername;
+    private @NotNull Long officerid;
+    private @NotNull String officername;
 
     public Long getOfficerid() {
         return this.officerid;
