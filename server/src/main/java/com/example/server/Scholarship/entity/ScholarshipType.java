@@ -2,6 +2,7 @@ package com.example.server.Scholarship.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -16,9 +17,9 @@ public class ScholarshipType {
     @SequenceGenerator(name = "ScholarshipType_seq", sequenceName = "ScholarshipType_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ScholarshipType_seq")
     @Column(name = "ScholarshipType_ID")
-    private @NonNull Long ScholarshipTypeid;
-    private @NonNull String goodEducation;
-    private @NonNull String educationalLoans;
+    private @NotNull Long ScholarshipTypeid;
+    private @NotNull String goodEducation;
+    private @NotNull String educationalLoans;
 
     public Long getScholarshipTypeid() {
         return this.ScholarshipTypeid;

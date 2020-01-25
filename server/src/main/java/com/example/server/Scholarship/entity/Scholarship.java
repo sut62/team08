@@ -6,6 +6,9 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.example.server.studentprofile.entity.StudentProfile;
 
 @Data
@@ -22,15 +25,17 @@ public class Scholarship {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Scholarship_seq")
     @Column(name = "Scholarship_ID")
 
-    private @NonNull Long scholarshipid;
-    private @NonNull Date paydate;
-    private @NonNull Integer money;
+    private @NotNull Long scholarshipid;
+    private @NotNull Date paydate;
+    
+    @Size(min = 3, max = 5)
+    private @NotNull String money;
 
-    public Integer getMoney() {
+    public String getMoney() {
         return this.money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
