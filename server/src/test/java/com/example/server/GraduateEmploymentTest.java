@@ -34,7 +34,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test
-    void testCreateGraduateEmploymentOK() {
+    void B5828104_testCreateGraduateEmploymentOK() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("บริษัทเสริมสุข");
@@ -50,7 +50,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testGraduateEmploymentIdMustNotBeNull() {
+    void B5828104_testGraduateEmploymentIdMustNotBeNull() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(null);
         graduateEmployment.setWorkplace("บริษัทเสริมสุข");
@@ -68,7 +68,7 @@ public class GraduateEmploymentTest {
 
 
     @Test 
-    void testWorkplaceMustNotBeNull() {
+    void B5828104_testWorkplaceMustNotBeNull() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace(null);
@@ -85,7 +85,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testJobPositionMustNotBeNull() {
+    void B5828104_testJobPositionMustNotBeNull() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("บริษัทเสริมสุข");
@@ -102,7 +102,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testEmailMustNotBeNull() {
+    void B5828104_testEmailMustNotBeNull() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("บริษัทเสริมสุข");
@@ -119,7 +119,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testEmailMustCorrectPattern() {
+    void B5828104_testEmailMustCorrectPattern() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("บริษัทเสริมสุข");
@@ -136,7 +136,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testWorkplaceMustNotLessThan5() {
+    void B5828104_testWorkplaceMustNotLessThan5() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("สถาน");
@@ -153,7 +153,7 @@ public class GraduateEmploymentTest {
     }
 
     @Test 
-    void testWorkplaceMustNotMoreThan30() {
+    void B5828104_testWorkplaceMustNotMoreThan30() {
         GraduateEmployment graduateEmployment = new GraduateEmployment();
         graduateEmployment.setGradempIdId(1L);
         graduateEmployment.setWorkplace("สถานที่ทำงานสำหรับนักศึกษาจบใหม่");
