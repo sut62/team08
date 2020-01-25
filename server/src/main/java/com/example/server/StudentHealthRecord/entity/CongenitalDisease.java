@@ -1,6 +1,9 @@
 package com.example.server.StudentHealthRecord.entity;
+
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Getter
@@ -15,8 +18,9 @@ public class CongenitalDisease {
     @SequenceGenerator(name="CongenitalDisease_seq",sequenceName="CongenitalDisease_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CongenitalDisease_seq")
     @Column(name = "CongenitalDisease_ID", unique = true, nullable = false)
-    private @NonNull Long congenitaldiseaseid;
-    private @NonNull String congenitaldisease;
+    private @NotNull Long congenitaldiseaseid;
+    @Size(min = 5, max = 30)
+    private @NotNull String congenitaldisease;
 
     public Long getCongenitaldiseaseid() {
         return this.congenitaldiseaseid;

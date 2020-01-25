@@ -2,6 +2,10 @@ package com.example.server.StudentHealthRecord.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import com.example.server.studentprofile.entity.*;
 
 @Getter
@@ -17,9 +21,11 @@ public class StudentHealthRecord {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "StudentHealthRecord_seq")
     @Column(name = "StudentHealthRecord_ID", unique = true, nullable = false)
 
-    private @NonNull Long StudentHealthRecordid;
-    private @NonNull Integer height;
-    private @NonNull Integer weight;
+    private @NotNull Long StudentHealthRecordid;
+    @Min(100) @Max(220)
+    private @NotNull Integer height;
+    @Min(30) @Max(200)
+    private @NotNull Integer weight;
 
     public Long getStudentHealthRecordid() {
         return this.StudentHealthRecordid;
