@@ -26,11 +26,29 @@
       </v-layout>
     </div>
 
-    <v-row justify="center">
-      <v-col cols="7">
-        <v-form v-model="valid" ref="form">
+    <div>
+      <v-row justify="center">
+        <v-col cols="5">
           <v-row justify="center">
-            <v-col cols="5">
+            <v-col cols="3">
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+              >
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+              >
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+              </div>
+            </v-col>
+          </v-row>
+          <v-form v-model="valid" ref="form">
+            <v-row justify="center">
+              <v-col cols="6">
+              
               <v-select
                 label="กรุณาเลือกนักศึกษา"
                 outlined
@@ -99,8 +117,8 @@
       <v-btn @click="saveGraduateEmployment" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
       <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
     </v-row>
-    <br />
-    <router-view />
+      <br />
+    </div>
   </v-app>
 </template>
 
@@ -123,7 +141,12 @@ export default {
       educationlevels: [],
       workstatus: [],
       submitted: false,
-      valid: false
+      valid: false,
+      saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   methods: {
@@ -180,16 +203,29 @@ export default {
           this.graduateemployment
         )
         .then(response => {
-          console.log(response.data)
-          if (response.data) {
-            alert("บันทึกสำเร็จ")
+          if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 3000)
           } else {
-            alert("บันทึกไม่สำเร็จ")
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
           }
         })
-        .catch(e => {
-          alert("บันทึกไม่สำเร็จ")
-          console.log(e)
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
         })
     },
     clear() {
