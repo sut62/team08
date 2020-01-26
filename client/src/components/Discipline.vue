@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app dark class="indigo">
       <v-toolbar-title class="headline text-uppercase">
-        <span>System :</span>
+        <span>System : </span>
         <span class="font-weight-light">DISCIPLINE</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -25,17 +25,17 @@
         </v-flex>
       </v-layout>
     </div>
-    
-    <v-row justify="center">
+
+    <div>
+      
+
+          <v-row justify="center">
         <v-btn style="margin-left: 15px;" color="indigo"  v-on:click="disciplineview">View Discipline</v-btn>
       </v-row>
 
-    <div>
-      <v-row justify="center">
-        <v-col cols="7">
           <v-form v-model="valid" ref="form">
             <v-row justify="center">
-              <v-col cols="5">
+              <v-col cols="6">
                 <v-select
                   label="นักศึกษา"
                   outlined
@@ -104,11 +104,35 @@
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
+
+
+                
               </v-col>
             </v-row>
           </v-form>
+          <v-row justify="center">
+        <v-col cols="7">
+          <v-row justify="center">
+            <v-col cols="6">
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+              >
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+              >
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+              </div>
+              
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
+      
+      <br />
       <v-row justify="center">
         <v-btn @click="saveDiscipline" :class="{ red: !valid, green: valid }">save</v-btn>
         <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
@@ -120,13 +144,9 @@
 
 <script>
 import http from "../http-common"
+
 export default {
-  // computed: {
-  //     computedDateFormattedMomentjs() {
-  //         return this.date ? moment(this.date).format("dddd Do, MMMM YYYY") : "";
-  //     }
-  // },
-  name: "discipline",
+   name: "discipline",
   data() {
     return {
       discipline: {
@@ -140,54 +160,20 @@ export default {
       },
       studentprofiles: [],
       breakrules: [],
-      punishs: []
+      punishs: [],
+      submitted: false,
+      valid: false,
+      menu1: false,
+      saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   methods: {
-    disciplineview() {
+     disciplineview() {
       this.$router.push("/disciplineview")
-    },
-    clear() {
-      this.discipline.studentproId = ""
-      this.discipline.schoolyear = ""
-      this.discipline.ruleId = ""
-      this.discipline.point = ""
-      this.discipline.punishId = ""
-      this.discipline.since = ""
-      this.discipline.until = ""
-    },
-    // @PostMapping("/discipline/{studentproId}/{schoolyear}/{ruleId}/{point}/{punishId}/{since}/{until}")
-    saveDiscipline() {
-      http
-        .post(
-          "/discipline/" +
-            this.discipline.studentproId +
-            "/" +
-            this.discipline.schoolyear +
-            "/" +
-            this.discipline.ruleId +
-            "/" +
-            this.discipline.point +
-            "/" +
-            this.discipline.punishId +
-            "/" +
-            this.discipline.since +
-            "/" +
-            this.discipline.until
-        )
-        .then(response => {
-          console.log(response.data)
-          if (response.data) {
-            alert("บันทึกสำเร็จ")
-            this.$router.push("/disciplineview");
-          } else {
-            alert("บันทึกไม่สำเร็จ")
-          }
-        })
-        .catch(e => {
-          alert("บันทึกไม่สำเร็จ")
-          console.log(e)
-        })
     },
     getStudentProfile() {
       http
@@ -221,6 +207,53 @@ export default {
         .catch(e => {
           console.log(e)
         })
+    },
+    saveDiscipline() {
+      http
+        .post(
+          "/discipline/" +
+            this.discipline.studentproId +
+            "/" +
+            this.discipline.schoolyear +
+            "/" +
+            this.discipline.ruleId +
+            "/" +
+            this.discipline.point +
+            "/" +
+            this.discipline.punishId +
+            "/" +
+            this.discipline.since +
+            "/" +
+            this.discipline.until
+        )
+        .then(response => {
+          if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 3000)
+          } else {
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
+          }
+        })
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
+        })
+    },
+    clear() {
+      this.$refs.form.reset()
     },
     refreshList() {
       this.getStudentProfile()
