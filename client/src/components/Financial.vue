@@ -29,9 +29,27 @@
     <div>
       <v-row justify="center">
         <v-col cols="7">
+          <v-row justify="center">
+            <v-col cols="5">
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+              >
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+              >
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+              </div>
+            </v-col>
+          </v-row>
           <v-form v-model="valid" ref="form">
             <v-row justify="center">
               <v-col cols="5">
+
+
                 <v-select
                   label="กรุณาเลือกนักศึกษา"
                   outlined
@@ -108,6 +126,8 @@
           </v-form>
         </v-col>
       </v-row>
+
+
       <v-row justify="center">
         <v-btn @click="saveFinancialInfo" :class="{ red: !valid, green: valid }">บันทึก</v-btn>
         <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
@@ -137,7 +157,12 @@ export default {
       students: [],
       levelofuses: [],
       spendmoneys: [],
-      moneyformparents: []
+      moneyformparents: [],
+      saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   methods: {
@@ -174,22 +199,34 @@ export default {
             "/" +
             this.financialinfo.notenough
         )
-
-        .then(response => {
-          console.log(response.data)
-          if (response.data) {
-            alert("บันทึกข้อมูลสำเร็จ")
-            this.$router.push("/financialview");
+.then(response => {
+          if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 3000)
           } else {
-            alert("บันทึกข้อมูลไม่สำเร็จ")
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
           }
         })
-        .catch(e => {
-          alert("บันทึกข้อมูลไม่สำเร็จ")
-          console.log(e)
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 3000)
         })
     },
-
+    
+    
     getStudentProfile() {
       http
         .get("/student")
