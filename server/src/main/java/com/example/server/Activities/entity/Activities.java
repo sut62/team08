@@ -4,6 +4,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import com.example.server.studentprofile.entity.StudentProfile;
 
@@ -29,7 +30,7 @@ public class Activities {
     @Size(min = 5, max = 20)
     private @NotNull String actname;
 
-    @Size(min = 10, max = 10)
+    @Pattern(regexp = "\\d{10}")
     private @NotNull String tel;
 
     public Long getActid() {
