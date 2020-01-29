@@ -120,30 +120,9 @@ public class ActivitiesTests {
         assertEquals("actname", v.getPropertyPath().toString());
     }
 
-    // Tel กรณีที่ 1 น้อยกว่า 10 ตัว
+    // Tel กรณีที่ 1 มากกว่า 10 ตัว
     @Test
-    void B5815173_testTelSizeLessThan10() {
-        final Activities activities = new Activities();
-        final Date date = new Date();
-        activities.setActid(1L);
-        activities.setActname("กกกกก");
-        activities.setTel("081234567");
-        activities.setDate(date);
-
-        final Set<ConstraintViolation<Activities>> result = validator.validate(activities);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        final ConstraintViolation<Activities> v = result.iterator().next();
-        assertEquals("size must be between 10 and 10", v.getMessage());
-        assertEquals("tel", v.getPropertyPath().toString());
-    }
-
-    // Tel กรณีที่ 2 มากกว่า 10 ตัว
-    @Test
-    void B5815173_testTelSizeMorethan10() {
+    void B5815173_testTelNotBe11Digit() {
         final Activities activities = new Activities();
         final Date date = new Date();
         activities.setActid(1L);
@@ -158,7 +137,48 @@ public class ActivitiesTests {
 
         // error message ตรงชนิด และถูก field
         final ConstraintViolation<Activities> v = result.iterator().next();
-        assertEquals("size must be between 10 and 10", v.getMessage());
+        assertEquals("must match \"\\d{10}\"", v.getMessage());
+        assertEquals("tel", v.getPropertyPath().toString());
+    }
+
+    // Tel กรณีที่ 2 น้อยกว่า 10 ตัว
+    @Test
+    void B5815173_testTelNotBe9Digit() {
+        final Activities activities = new Activities();
+        final Date date = new Date();
+        activities.setActid(1L);
+        activities.setActname("กกกกก");
+        activities.setTel("081234567");
+        activities.setDate(date);
+
+        final Set<ConstraintViolation<Activities>> result = validator.validate(activities);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        final ConstraintViolation<Activities> v = result.iterator().next();
+        assertEquals("must match \"\\d{10}\"", v.getMessage());
+        assertEquals("tel", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5815173_testTelNotBeCharactor() {
+        final Activities activities = new Activities();
+        final Date date = new Date();
+        activities.setActid(1L);
+        activities.setActname("กกกกก");
+        activities.setTel("081234567A");
+        activities.setDate(date);
+
+        final Set<ConstraintViolation<Activities>> result = validator.validate(activities);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        final ConstraintViolation<Activities> v = result.iterator().next();
+        assertEquals("must match \"\\d{10}\"", v.getMessage());
         assertEquals("tel", v.getPropertyPath().toString());
     }
 
