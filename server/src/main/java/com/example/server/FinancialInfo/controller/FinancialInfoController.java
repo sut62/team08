@@ -17,7 +17,7 @@ import com.example.server.studentprofile.repository.StudentProfileRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 public class FinancialInfoController {
 
     @Autowired
@@ -47,8 +47,8 @@ public class FinancialInfoController {
 
     @PostMapping("/financialinfo/{studentproId}/{academicy}/{moneyparentId}/{houseincome}/{spendId}/{levelId}/{notenough}")
     public FinancialInfo newFinancialInfo(
-            @PathVariable long studentproId, @PathVariable String academicy, @PathVariable long moneyparentId,
-            @PathVariable String houseincome, @PathVariable long spendId, @PathVariable long levelId,
+            @PathVariable long studentproId, @PathVariable Integer academicy, @PathVariable long moneyparentId,
+            @PathVariable Integer houseincome, @PathVariable long spendId, @PathVariable long levelId,
             @PathVariable String notenough)
     {
         FinancialInfo financialinfo = new FinancialInfo();
