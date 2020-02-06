@@ -42,8 +42,8 @@ public class FinancialInfoTest {
     void B5812431_testCreatedFinancialInfoOK() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("12345");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(50000);
         financialinfo.setNotenough("aa");
 
         financialinfo = financialinfoRepository.saveAndFlush(financialinfo);
@@ -51,58 +51,19 @@ public class FinancialInfoTest {
         Optional<FinancialInfo> FinancialInfoCreated = financialinfoRepository
                 .findById(financialinfo.getFinanId());
         assertEquals(1L, FinancialInfoCreated.get().getFinanId());
-        assertEquals("1234", FinancialInfoCreated.get().getAcademicy());
-        assertEquals("12345", FinancialInfoCreated.get().getHouseincome());
+        assertEquals(2562, FinancialInfoCreated.get().getAcademicy());
+        assertEquals(50000, FinancialInfoCreated.get().getHouseincome());
         assertEquals("aa", FinancialInfoCreated.get().getNotenough());
     
     }
-    // academicy กรณีที่ 2 น้อยกว่า 4 ตัว
-    @Test
-    void B5812431_testAcademicySizeLessThan4() {
-        FinancialInfo financialinfo = new FinancialInfo();
-        financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("123");
-        financialinfo.setHouseincome("12345");
-        financialinfo.setNotenough("aa");
-
-        Set<ConstraintViolation<FinancialInfo>> result = validator.validate(financialinfo);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<FinancialInfo> v = result.iterator().next();
-        assertEquals("must match \"\\d{4}\"", v.getMessage());
-        assertEquals("academicy", v.getPropertyPath().toString());
-    }
-
-    // academicy กรณีที่ 3 มากกว่า 4 ตัว
-    @Test
-    void B5812431_testAcademicySizeMorethan5() {
-        FinancialInfo financialinfo = new FinancialInfo();
-        financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("12345");
-        financialinfo.setHouseincome("12345");
-        financialinfo.setNotenough("aa");
-
-        Set<ConstraintViolation<FinancialInfo>> result = validator.validate(financialinfo);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<FinancialInfo> v = result.iterator().next();
-        assertEquals("must match \"\\d{4}\"", v.getMessage());
-        assertEquals("academicy", v.getPropertyPath().toString());
-    }
-
-    // academicy กรณีที่ 4 ชื่อต้องไม่เป็นค่าว่าง
+   
+    // academicy กรณีที่ 1 ชื่อต้องไม่เป็นค่าว่าง
     @Test
     void B5812431_testAcademicyMustNotBeNull() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
         financialinfo.setAcademicy(null);
-        financialinfo.setHouseincome("12345");
+        financialinfo.setHouseincome(50000);
         financialinfo.setNotenough("aa");
 
         Set<ConstraintViolation<FinancialInfo>> result = validator.validate(financialinfo);
@@ -116,13 +77,13 @@ public class FinancialInfoTest {
         assertEquals("academicy", v.getPropertyPath().toString());
     }
 
-    // Houseincome กรณีที่ 1 น้อยกว่า 5 ตัว
+    
     @Test
-    void B5812431_testHouseincomeSizeLessThan5() {
+    void B5812431_testHouseincomeMustNotLessThan20000() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("1234");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(19999);
         financialinfo.setNotenough("aa");
 
         Set<ConstraintViolation<FinancialInfo>> result = validator.validate(financialinfo);
@@ -132,17 +93,17 @@ public class FinancialInfoTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<FinancialInfo> v = result.iterator().next();
-        assertEquals("size must be between 5 and 10", v.getMessage());
+        assertEquals("must be greater than or equal to 20000", v.getMessage());
         assertEquals("houseincome", v.getPropertyPath().toString());
     }
 
-    // Houseincome กรณีที่ 2 มากกว่า 10 ตัว
+    
     @Test
-    void B5812431_testHouseincomeSizeMorethan10() {
+    void B5812431_testHouseincomeMustNotMoreThan100000() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("12345678901");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(100001);
         financialinfo.setNotenough("aa");
 
         Set<ConstraintViolation<FinancialInfo>> result = validator.validate(financialinfo);
@@ -152,7 +113,7 @@ public class FinancialInfoTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<FinancialInfo> v = result.iterator().next();
-        assertEquals("size must be between 5 and 10", v.getMessage());
+        assertEquals("must be less than or equal to 100000", v.getMessage());
         assertEquals("houseincome", v.getPropertyPath().toString());
     }
 
@@ -161,7 +122,7 @@ public class FinancialInfoTest {
     void B5812431_testHouseincomeMustNotBeNull() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
+        financialinfo.setAcademicy(2562);
         financialinfo.setHouseincome(null);
         financialinfo.setNotenough("aa");
 
@@ -181,8 +142,8 @@ public class FinancialInfoTest {
     void B5812431_testNotenoughSizeLessThan2() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("12345");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(50000);
         financialinfo.setNotenough("a");
 
 
@@ -202,8 +163,8 @@ public class FinancialInfoTest {
     void B5812431_testNotenoughSizeMorethan20() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("12345");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(50000);
         financialinfo.setNotenough("aaaaaaaaaaaaaaaaaaaaa");
 
 
@@ -224,8 +185,8 @@ public class FinancialInfoTest {
     void B5812431_testNotenoughMustNotBeNull() {
         FinancialInfo financialinfo = new FinancialInfo();
         financialinfo.setFinanId(1L);
-        financialinfo.setAcademicy("1234");
-        financialinfo.setHouseincome("12345");
+        financialinfo.setAcademicy(2562);
+        financialinfo.setHouseincome(50000);
         financialinfo.setNotenough(null);
 
 
