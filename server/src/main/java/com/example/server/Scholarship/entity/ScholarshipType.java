@@ -19,7 +19,6 @@ public class ScholarshipType {
     @Column(name = "ScholarshipType_ID")
     private @NotNull Long ScholarshipTypeid;
     private @NotNull String goodEducation;
-    private @NotNull String educationalLoans;
 
     public Long getScholarshipTypeid() {
         return this.ScholarshipTypeid;
@@ -35,14 +34,6 @@ public class ScholarshipType {
 
     public void setGoodEducation(String goodEducation) {
         this.goodEducation = goodEducation;
-    }
-
-    public String getEducationalLoans() {
-        return this.educationalLoans;
-    }
-
-    public void setEducationalLoans(String educationalLoans) {
-        this.educationalLoans = educationalLoans;
     }
 
 }
