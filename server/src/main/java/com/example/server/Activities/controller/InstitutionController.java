@@ -12,7 +12,7 @@ import com.example.server.Activities.repository.InstitutionRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController public class InstitutionController {
 
     @Autowired
