@@ -19,7 +19,7 @@ import com.example.server.Activities.repository.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 public class ActivitiesController {
 
     @Autowired
