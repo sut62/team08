@@ -38,13 +38,11 @@ public class ScholarshipTypeTest {
         ScholarshipType scholarshipType = new ScholarshipType();
         scholarshipType.setScholarshipTypeid(1L);
         scholarshipType.setGoodEducation("ทุนศักยบันณฑิต");
-        scholarshipType.setEducationalLoans("ทุนกู้ยืมการศึกษา");
         scholarshipType = ScholarshipTypeRepository.saveAndFlush(scholarshipType);
 
         Optional<ScholarshipType> scholarshipTypeCreated = ScholarshipTypeRepository.findById(scholarshipType.getScholarshipTypeid());
         assertEquals(1L, scholarshipTypeCreated.get().getScholarshipTypeid());
         assertEquals("ทุนศักยบันณฑิต", scholarshipTypeCreated.get().getGoodEducation());
-        assertEquals("ทุนกู้ยืมการศึกษา", scholarshipTypeCreated.get().getEducationalLoans());
     }
 
     @Test
@@ -52,7 +50,6 @@ public class ScholarshipTypeTest {
         ScholarshipType scholarshipType = new ScholarshipType();
         scholarshipType.setScholarshipTypeid(null);
         scholarshipType.setGoodEducation("ทุนศักยบันณฑิต");
-        scholarshipType.setEducationalLoans("ทุนกู้ยืมการศึกษา");
 
         Set<ConstraintViolation<ScholarshipType>> result = validator.validate(scholarshipType);
 
@@ -69,7 +66,6 @@ public class ScholarshipTypeTest {
         ScholarshipType scholarshipType = new ScholarshipType();
         scholarshipType.setScholarshipTypeid(1L);
         scholarshipType.setGoodEducation(null);
-        scholarshipType.setEducationalLoans("ทุนกู้ยืมการศึกษา");
 
         Set<ConstraintViolation<ScholarshipType>> result = validator.validate(scholarshipType);
 
@@ -80,19 +76,4 @@ public class ScholarshipTypeTest {
         assertEquals("goodEducation", v.getPropertyPath().toString());
     }
 
-    @Test
-    void B5814619_testEducationalLoansMustNotBeNull() {
-        ScholarshipType scholarshipType = new ScholarshipType();
-        scholarshipType.setScholarshipTypeid(1L);
-        scholarshipType.setGoodEducation("ทุนศักยบันณฑิต");
-        scholarshipType.setEducationalLoans(null);
-
-        Set<ConstraintViolation<ScholarshipType>> result = validator.validate(scholarshipType);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<ScholarshipType> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("educationalLoans", v.getPropertyPath().toString());
-    }
 }
