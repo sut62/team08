@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface FinancialInfoRepository extends JpaRepository <FinancialInfo, Long> {
-    FinancialInfo findById(long FinancialId);
+    FinancialInfo findById(long finanId);
 }
