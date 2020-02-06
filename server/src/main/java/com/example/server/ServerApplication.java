@@ -146,7 +146,6 @@ public class ServerApplication {
 			Stream.of("ทุนศักยบันณฑิต", "ทุน 84 พรรษา", "ทุนกู้ยืมการศึกษา").forEach(scholarshipType -> {
 				ScholarshipType scholarshiptype = new ScholarshipType();
 				scholarshiptype.setGoodEducation(scholarshipType);
-				scholarshiptype.setEducationalLoans(scholarshipType);
 				scholarshipTypeRepository.save(scholarshiptype);
 			});
 
