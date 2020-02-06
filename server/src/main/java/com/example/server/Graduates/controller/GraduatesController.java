@@ -21,7 +21,7 @@ import com.example.server.studentprofile.repository.StudentProfileRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 public class GraduatesController {
 
     @Autowired

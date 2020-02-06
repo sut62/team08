@@ -75,7 +75,7 @@ public class ServerApplication {
 				schoolyear.setScyear(year);
 				schoolyearRepository.save(schoolyear);
 			});
-			Stream.of("อาคารเรียนรวม 1", "อาคารเรียนรวม 2").forEach(ins -> {
+			Stream.of("ชมรมคอมพิวเตอร์", "ชมรมกีฬาและนันทนาการ").forEach(ins -> {
 				Institution institution = new Institution();
 				institution.setInsname(ins);
 				institutionRepository.save(institution);
