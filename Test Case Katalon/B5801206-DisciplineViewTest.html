@@ -8,7 +8,7 @@
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">DisciplineViewTestPass</td></tr>
+<tr><td rowspan="1" colspan="3">DisciplineViewFail</td></tr>
 </thead>
 <tbody>
 <tr><td>open</td><td>http://localhost:8081/home<datalist><option>http://localhost:8081/home</option></datalist></td><td></td>
@@ -21,11 +21,65 @@
 </tr>
 <tr><td>type</td><td>id=input-10<datalist><option>id=input-10</option><option>//input[@id='input-10']</option><option>//div[2]/div/div/div/input</option><option>css=#input-10</option></datalist></td><td>1234</td>
 </tr>
-<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//button</option><option>css=button.v-btn.v-btn--block.v-btn--contained.theme--dark.v-size--large.warning</option></datalist></td><td></td>
+<tr><td>click</td><td>//button/span<datalist><option>//button/span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
 </tr>
 <tr><td>assertAlert</td><td>เข้าสู่ระบบสำเร็จ<datalist><option>เข้าสู่ระบบสำเร็จ</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>//div[@id='app']/div/div[2]/div/button/span<datalist><option>//div[@id='app']/div/div[2]/div/button/span</option><option>//button/span</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default.indigo &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//td<datalist><option>//td</option><option>css=td</option></datalist></td><td>No data available</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">DisciplineViewPass</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8081/home<datalist><option>http://localhost:8081/home</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-7<datalist><option>id=input-7</option><option>//input[@id='input-7']</option><option>//input</option><option>css=#input-7</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-7<datalist><option>id=input-7</option><option>//input[@id='input-7']</option><option>//input</option><option>css=#input-7</option></datalist></td><td>knpia</td>
+</tr>
+<tr><td>click</td><td>id=input-10<datalist><option>id=input-10</option><option>//input[@id='input-10']</option><option>//div[2]/div/div/div/input</option><option>css=#input-10</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-10<datalist><option>id=input-10</option><option>//input[@id='input-10']</option><option>//div[2]/div/div/div/input</option><option>css=#input-10</option></datalist></td><td>1234</td>
+</tr>
+<tr><td>click</td><td>//button/span<datalist><option>//button/span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>assertAlert</td><td>เข้าสู่ระบบสำเร็จ<datalist><option>เข้าสู่ระบบสำเร็จ</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//form/div/div/div/div/div/div/div<datalist><option>//div[@id='app']/div[2]/div[2]/form/div/div/div/div/div/div/div</option><option>//form/div/div/div/div/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div/div/div/div/div/div/div<datalist><option>id=ทดสอบ-ชื่อ-list-item-78</option><option>//div[@id='ทดสอบ-ชื่อ-list-item-78']</option><option>xpath=(//div[@id='list-23']/div/div/div)[2]</option><option>//div/div/div/div/div/div/div</option><option>css=#ทดสอบ-ชื่อ-list-item-78</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-30<datalist><option>id=input-30</option><option>//input[@id='input-30']</option><option>//div[@id='app']/div[2]/div[2]/form/div/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-30</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-30<datalist><option>id=input-30</option><option>//input[@id='input-30']</option><option>//div[@id='app']/div[2]/div[2]/form/div/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-30</option></datalist></td><td>2562</td>
+</tr>
+<tr><td>click</td><td>//div/div/div[3]/div/div/div/div<datalist><option>//div[@id='app']/div[3]/div[2]/form/div/div/div[3]/div/div/div/div</option><option>//div/div/div[3]/div/div/div/div</option><option>css=div.v-input.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div/div/div[3]/div/div<datalist><option>id=ทำร้ายร่างกาย-list-item-81</option><option>//div[@id='ทำร้ายร่างกาย-list-item-81']</option><option>//div[@id='list-33']/div[3]/div/div</option><option>//div/div/div[3]/div/div</option><option>css=#ทำร้ายร่างกาย-list-item-81</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-40<datalist><option>id=input-40</option><option>//input[@id='input-40']</option><option>//div[@id='app']/div[3]/div[2]/form/div/div/div[4]/div/div/div/input</option><option>//div[4]/div/div/div/input</option><option>css=#input-40</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-40<datalist><option>id=input-40</option><option>//input[@id='input-40']</option><option>//div[@id='app']/div[3]/div[2]/form/div/div/div[4]/div/div/div/input</option><option>//div[4]/div/div/div/input</option><option>css=#input-40</option></datalist></td><td>80</td>
+</tr>
+<tr><td>click</td><td>//div[5]/div/div/div/div<datalist><option>//div[@id='app']/div[4]/div[2]/form/div/div/div[5]/div/div/div/div</option><option>//div[5]/div/div/div/div</option><option>css=div.v-input.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div/div/div[3]/div/div<datalist><option>id=พักการเรียน-list-item-88</option><option>//div[@id='พักการเรียน-list-item-88']</option><option>//div[@id='list-43']/div[3]/div/div</option><option>//div/div/div[3]/div/div</option><option>css=#พักการเรียน-list-item-88</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div[4]/div[2]/form/div/div/div[6]/div[2]/div/div[2]/table/tbody/tr[2]/td[7]/button/div<datalist><option>//div[@id='app']/div[4]/div[2]/form/div/div/div[6]/div[2]/div/div[2]/table/tbody/tr[2]/td[7]/button/div</option><option>//tr[2]/td[7]/button/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div[4]/div[2]/form/div/div/div[7]/div[2]/div/div[2]/table/tbody/tr[4]/td[7]/button/div<datalist><option>//div[@id='app']/div[4]/div[2]/form/div/div/div[7]/div[2]/div/div[2]/table/tbody/tr[4]/td[7]/button/div</option><option>//div[7]/div[2]/div/div[2]/table/tbody/tr[4]/td[7]/button/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div[4]/div[2]/div[3]/button/span<datalist><option>//div[@id='app']/div[4]/div[2]/div[3]/button/span</option><option>//div[3]/button/span</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default.green &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div[4]/div[2]/div[2]/div/div/div/div/div<datalist><option>//div[@id='app']/div[4]/div[2]/div[2]/div/div/div/div/div</option><option>//div[2]/div[2]/div/div/div/div/div</option><option>css=div.col.col-7 &gt; div.row.justify-center &gt; div.col.col-6 &gt; div &gt; div</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div[4]/div[2]/div[2]/div/div/div/div/div<datalist><option>//div[@id='app']/div[4]/div[2]/div[2]/div/div/div/div/div</option><option>//div[2]/div[2]/div/div/div/div/div</option><option>css=div.col.col-7 &gt; div.row.justify-center &gt; div.col.col-6 &gt; div &gt; div</option></datalist></td><td>บันทึกข้อมูลสำเร็จ</td>
+</tr>
+<tr><td>click</td><td>//button[@type='button']<datalist><option>//button[@type='button']</option><option>//div[@id='app']/div[4]/div[2]/div/button</option><option>//button</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default.indigo</option></datalist></td><td></td>
 </tr>
 <tr><td>click</td><td>//div<datalist><option>//div</option><option>css=div.container.grey.lighten-5</option></datalist></td><td></td>
 </tr>
