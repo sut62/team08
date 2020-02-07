@@ -1,14 +1,14 @@
 package com.example.server.Discipline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-// import java.util.Date;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import com.example.server.Discipline.repository.*;
@@ -19,7 +19,7 @@ import com.example.server.Discipline.entity.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 public class DisciplineController {
 
     @Autowired
@@ -43,7 +43,8 @@ public class DisciplineController {
     @PostMapping("/discipline/{studentproId}/{schoolyear}/{ruleId}/{point}/{punishId}/{since}/{until}")
     public Discipline newDiscipline(@PathVariable long studentproId, @PathVariable String schoolyear,
             @PathVariable long ruleId, @PathVariable long point, @PathVariable long punishId,
-            @PathVariable String since, @PathVariable String until) {
+            @PathVariable("since") @DateTimeFormat (pattern = "yyyy-MM-dd") Date since, 
+            @PathVariable ("until") @DateTimeFormat (pattern = "yyyy-MM-dd") Date until) {
         Discipline discipline = new Discipline();
         discipline.setSchoolyear(schoolyear);
         discipline.setSince(since);

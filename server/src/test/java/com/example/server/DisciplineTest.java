@@ -41,11 +41,12 @@ public class DisciplineTest {
     @Test
     void B5801206_testCreatedDisciplineOK() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("2562");
         discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
         
 
         discipline = disciplineRepository.saveAndFlush(discipline);
@@ -55,19 +56,20 @@ public class DisciplineTest {
         assertEquals(1L, DisciplineCreated.get().getDisciplineId());
         assertEquals("2562", DisciplineCreated.get().getSchoolyear());
         assertEquals(50L, DisciplineCreated.get().getPoint());
-        assertEquals("term2 2562", DisciplineCreated.get().getSince());
-        assertEquals("term3 2562", DisciplineCreated.get().getUntil());
+        assertEquals(date, DisciplineCreated.get().getSince());
+        assertEquals(date, DisciplineCreated.get().getUntil());
     }
 
     // Schoolyear กรณีที่ 2 น้อยกว่า 4 ตัว
     @Test
     void B5801206_testSchoolyearSizeLessThan4() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("123");
         discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
@@ -84,11 +86,12 @@ public class DisciplineTest {
     @Test
     void B5801206_testSchoolyearSizeMorethan4() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("12345");
         discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
@@ -104,11 +107,12 @@ public class DisciplineTest {
     @Test // Schoolyear กรณี 4 ต้องไม่เป็น Charactor
     void B5801206_testSchoolyearNotBeCharactor() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("123A");
         discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
@@ -123,11 +127,12 @@ public class DisciplineTest {
     @Test
     void B5801206_testSchoolyearMustNotBeNull() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear(null);
         discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
@@ -140,133 +145,56 @@ public class DisciplineTest {
         assertEquals("schoolyear", v.getPropertyPath().toString());
     }
 
-    // Since กรณีที่ 6 น้อยกว่า 4 ตัว
+    // Point กรณีที่ 6 น้อยกว่า 10
     @Test
-    void B5801206_testSinceMustNotLessThan4() {
+    void B5801206_testPointMustNotLessThan10() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince("123");
-        discipline.setUntil("term3 2562");
+        discipline.setPoint(9L);
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
         assertEquals(1, result.size());
 
         ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
-        assertEquals("since", v.getPropertyPath().toString());
+        assertEquals("must be greater than or equal to 10", v.getMessage());
+        assertEquals("point", v.getPropertyPath().toString());
     }
 
-    // Since กรณีที่ 7 มากกว่า 10 ตัว
+    // Point กรณีที่ 7 มากกว่า 100
     @Test
-    void B5801206_testSinceMustNotMoreThan10() {
+    void B5801206_testPointMustNotMoreThan100() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince("12345678901");
-        discipline.setUntil("term3 2562");
+        discipline.setPoint(101L);
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
         assertEquals(1, result.size());
 
         ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
-        assertEquals("since", v.getPropertyPath().toString());
+        assertEquals("must be less than or equal to 100", v.getMessage());
+        assertEquals("point", v.getPropertyPath().toString());
     }
 
-    // Since กรณีที่ 8 ต้องไม่เป็นค่าว่าง
-    @Test
-    void B5801206_testSinceMustNotBeNull() {
-        Discipline discipline = new Discipline();
-        discipline.setDisciplineId(1L);
-        discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince(null);
-        discipline.setUntil("term3 2562");
-
-        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("since", v.getPropertyPath().toString());
-    }
-
-    // Until กรณีที่ 9 น้อยกว่า 4 ตัว
-    @Test
-    void B5801206_testUntilMustNotLessThan4() {
-        Discipline discipline = new Discipline();
-        discipline.setDisciplineId(1L);
-        discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("123");
-
-        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
-        assertEquals("until", v.getPropertyPath().toString());
-    }
-
-    // Until กรณีที่ 10 มากกว่า 10 ตัว
-    @Test
-    void B5801206_testUntilMustNotMoreThan10() {
-        Discipline discipline = new Discipline();
-        discipline.setDisciplineId(1L);
-        discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("12345678901");
-
-        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
-        assertEquals("until", v.getPropertyPath().toString());
-    }
-
-    // Until กรณีที่ 11 ต้องไม่เป็นค่าว่าง
-    @Test
-    void B5801206_testUntilMustNotBeNull() {
-        Discipline discipline = new Discipline();
-        discipline.setDisciplineId(1L);
-        discipline.setSchoolyear("2562");
-        discipline.setPoint(50L);
-        discipline.setSince("term2 2562");
-        discipline.setUntil(null);
-
-        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
-
-        // result ต้องมี error 1 ค่าเท่านั้น
-        assertEquals(1, result.size());
-
-        // error message ตรงชนิด และถูก field
-        ConstraintViolation<Discipline> v = result.iterator().next();
-        assertEquals("must not be null", v.getMessage());
-        assertEquals("until", v.getPropertyPath().toString());
-    }
-
-    // Point กรณีที่ 12 ต้องไม่เป็นค่าว่าง
+    // Point กรณีที่ 8 ต้องไม่เป็นค่าว่าง
     @Test
     void B5801206_testPointMustNotBeNull() {
         Discipline discipline = new Discipline();
+        Date date = new Date();
         discipline.setDisciplineId(1L);
         discipline.setSchoolyear("2562");
         discipline.setPoint(null);
-        discipline.setSince("term2 2562");
-        discipline.setUntil("term3 2562");
+        discipline.setSince(date);
+        discipline.setUntil(date);
 
         Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
 
@@ -278,5 +206,47 @@ public class DisciplineTest {
         assertEquals("must not be null", v.getMessage());
         assertEquals("point", v.getPropertyPath().toString());
     }
+
+    // Since กรณีที่ 9 ต้องไม่เป็นค่าว่าง
+    @Test
+    void B5801206_testSinceMustNotBeNull() {
+        Discipline discipline = new Discipline();
+        Date date = new Date();
+        discipline.setDisciplineId(1L);
+        discipline.setSchoolyear("2562");
+        discipline.setPoint(50L);
+        discipline.setSince(null);
+        discipline.setUntil(date);
+
+        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Discipline> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("since", v.getPropertyPath().toString());
+    }
+
+    // Until กรณีที่ 10 ต้องไม่เป็นค่าว่าง
+    @Test
+    void B5801206_testUntilMustNotBeNull() {
+        Discipline discipline = new Discipline();
+        Date date = new Date();
+        discipline.setDisciplineId(1L);
+        discipline.setSchoolyear("2562");
+        discipline.setPoint(50L);
+        discipline.setSince(date);
+        discipline.setUntil(null);
+
+        Set<ConstraintViolation<Discipline>> result = validator.validate(discipline);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Discipline> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("until", v.getPropertyPath().toString());
+    }
+
+    
 
 }
