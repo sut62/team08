@@ -86,27 +86,15 @@
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-select>
+                  <h4>วันที่เริ่มโทษ:</h4>
+                      <v-date-picker locale="th" v-model="discipline.since" @change="menu1 = false"></v-date-picker>
+                <br  />
+                <br  />    
+                <br  />
+                <h4>วันที่สิ้นโทษ:</h4>
+                      <v-date-picker locale="th" v-model="discipline.until" @change="menu1 = false"></v-date-picker>
+                    
 
-                <v-text-field
-                  label="เริ่มโทษ"
-                  outlined
-                  type="text"
-                  v-model="discipline.since"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                ></v-text-field>
-
-                <v-text-field
-                  label="สิ้นโทษ"
-                  outlined
-                  type="text"
-                  v-model="discipline.until"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                ></v-text-field>
-
-
-                
               </v-col>
             </v-row>
           </v-form>
@@ -144,8 +132,23 @@
 
 <script>
 import http from "../http-common"
+import moment from "moment" 
 
 export default {
+  computed: {
+    computedDateFormattedMomentjs() {
+      return this.discipline.since
+        ? moment(this.discipline.since).format("dddd Do, MMMM YYYY")
+        : ""
+    }
+  },
+  computed: {
+    computedDateFormattedMomentjs() {
+      return this.discipline.until
+        ? moment(this.discipline.until).format("dddd Do, MMMM YYYY")
+        : ""
+    }
+  },
    name: "discipline",
   data() {
     return {
@@ -161,9 +164,10 @@ export default {
       studentprofiles: [],
       breakrules: [],
       punishs: [],
+      menu: false,
+      menu1: false,
       submitted: false,
       valid: false,
-      menu1: false,
       saveStatus: {
         isSuccess: false,
         isFail: false,
@@ -224,7 +228,8 @@ export default {
             "/" +
             this.discipline.since +
             "/" +
-            this.discipline.until
+            this.discipline.until,
+          this.discipline
         )
         .then(response => {
           if (response) {
