@@ -4,8 +4,10 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
 
+import java.util.Date;
 import com.example.server.studentprofile.entity.StudentProfile;
 
 @Data
@@ -26,13 +28,12 @@ public class Discipline {
 
     @Pattern(regexp = "\\d{4}")
     private @NotNull String schoolyear;
-    private @NotNull Long point;
 
-    @Size(min = 4, max = 10)
-    private @NotNull String since;
+    @Min(10) @Max(100)
+    private @NotNull Long point;
     
-    @Size(min = 4, max = 10)
-    private @NotNull String until;
+    private @NotNull Date since;
+    private @NotNull Date until;
 
     public Long getDisciplineId() {
         return this.disciplineId;
@@ -58,19 +59,19 @@ public class Discipline {
         this.point = point;
     }
 
-    public String getSince() {
+    public Date getSince() {
         return this.since;
     }
 
-    public void setSince(String since) {
+    public void setSince(Date since) {
         this.since = since;
     }
 
-    public String getUntil() {
+    public Date getUntil() {
         return this.until;
     }
 
-    public void setUntil(String until) {
+    public void setUntil(Date until) {
         this.until = until;
     }
 
