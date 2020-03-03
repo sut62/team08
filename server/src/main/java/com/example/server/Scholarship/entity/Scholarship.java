@@ -57,15 +57,15 @@ public class Scholarship {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ScholarshipType.class)
     @JoinColumn(name = "Scholarshiptype_ID", insertable = true)
-    private ScholarshipType scholarshipType;
+    private @NotNull ScholarshipType scholarshipType;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "Student_ID", insertable = true)
-    private StudentProfile studentProfile;
+    private @NotNull StudentProfile studentProfile;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ScholarshipOfficer.class)
     @JoinColumn(name = "ScholarshipOfficer_ID", insertable = true)
-    private ScholarshipOfficer scholarshipOfficer;
+    private @NotNull ScholarshipOfficer scholarshipOfficer;
 
     public ScholarshipType getScholarshipType() {
         return this.scholarshipType;

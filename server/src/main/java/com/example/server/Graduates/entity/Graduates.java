@@ -69,7 +69,7 @@ public class Graduates {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = EducationLevel.class)
     @JoinColumn(name = "EducationLevel_ID", insertable = true)
-    private EducationLevel educationlevel;
+    private @NotNull EducationLevel educationlevel;
 
     public EducationLevel getEducationlevel() {
         return this.educationlevel;
@@ -81,7 +81,7 @@ public class Graduates {
    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = SchoolYear.class)
     @JoinColumn(name = "SchoolYear_ID", insertable = true)
-    private SchoolYear schoolyear;
+    private @NotNull SchoolYear schoolyear;
 
     public SchoolYear getSchoolyear() {
         return this.schoolyear;
@@ -93,7 +93,7 @@ public class Graduates {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "StudentProfile_ID", insertable = true)
-    private StudentProfile studentprofile;
+    private @NotNull StudentProfile studentprofile;
 
     public StudentProfile getStudentprofile() {
         return this.studentprofile;

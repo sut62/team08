@@ -67,7 +67,7 @@ public class Activities {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = SchoolYear.class)
     @JoinColumn(name = "SchoolYear_ID", insertable = true)
-    private SchoolYear schoolyear;
+    private @NotNull SchoolYear schoolyear;
 
     public SchoolYear getSchoolyear() {
         return this.schoolyear;
@@ -79,7 +79,7 @@ public class Activities {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Institution.class)
     @JoinColumn(name = "Institution_ID", insertable = true)
-    private Institution institution;
+    private @NotNull Institution institution;
 
     public Institution getInstitution() {
         return this.institution;
@@ -91,7 +91,7 @@ public class Activities {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "StudentProfile_ID")
-    private StudentProfile studentprofile;
+    private @NotNull StudentProfile studentprofile;
 
     public StudentProfile getStudentprofile() {
         return this.studentprofile;

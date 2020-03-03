@@ -77,15 +77,15 @@ public class Discipline {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Breakrule.class)
     @JoinColumn(name = "Breakrule_ID", insertable = true)
-    private Breakrule breakrule;
+    private @NotNull Breakrule breakrule;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Punish.class)
     @JoinColumn(name = "Punish_ID", insertable = true)
-    private Punish punish;
+    private @NotNull Punish punish;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "StudentProfile_ID", insertable = true)
-    private StudentProfile studentprofile;
+    private @NotNull StudentProfile studentprofile;
 
     public Breakrule getBreakrule() {
         return this.breakrule;
