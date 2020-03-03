@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Login from "../components/Login";
-import Home from "../components/Home";
 import StudentProfile from "../components/Studentprofile";
 import Activities from "../components/Activities";
 import Discipline from "../components/Discipline";
@@ -9,11 +8,12 @@ import Financial from "../components/Financial";
 import StudentHealthRecord from "../components/StudentHealthRecord";
 import Scholarship from "../components/Scholarship";
 import DisciplineView from "../components/DisciplineView";
-import FinancialView from "../components/FinancialView"
+import FinancialView from "../components/FinancialView";
 import Graduates from "../components/Graduates";
 import ActivitiesView from "../components/ActivitiesView";
 import GraduateEmployment from "../components/GraduateEmployment";
 import ScholarshipView from "../components/ScholarshipView";
+import StudentHome from "../components/StudentHome";
 Vue.use(Router);
 
 export default new Router({
@@ -21,19 +21,46 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/student",
+      name: "studenthome",
+      component: StudentHome,
+      children: [
+        {
+          path: "/studentprofile",
+          name: "studentprofile",
+          component: StudentProfile
+        },
+        {
+          path: "/studenthealthrecord",
+          name: "studenthealthrecord",
+          component: StudentHealthRecord
+        },
+        {
+          path: "/financial",
+          name: "financial",
+          component: Financial
+        },
+        {
+          path: "/graduates",
+          name: "graduates",
+          component: Graduates
+        },
+        {
+          path: "/graduateemployment",
+          name: "graduateemployment",
+          component: GraduateEmployment
+        }
+      ]
+    },
+    {
       path: "/",
       name: "login",
       component: Login
     },
     {
-      path: "/home",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/studentprofile",
-      name: "studentprofile",
-      component: StudentProfile
+      path: "/login",
+      name: "login",
+      component: Login
     },
     {
       path: "/activities",
@@ -45,17 +72,6 @@ export default new Router({
       name: "discipline",
       component: Discipline
     },
-    {
-      path: "/financial",
-      name: "financial",
-      component: Financial
-    },
-    {
-      path: "/studenthealthrecord",
-      name: "studenthealthrecord",
-      component: StudentHealthRecord
-    },
-
     {
       path: "/scholarship",
       name: "scholarship",
@@ -71,26 +87,17 @@ export default new Router({
       name: "financialview",
       component: FinancialView
     },
-    {
-      path: "/graduates",
-      name: "graduates",
-      component: Graduates
-      },
 
-      {
-        path: "/activitiesview",
-        name: "activitiesview",
-        component: ActivitiesView
-      },
-	  {
-      path: "/graduateemployment",
-      name: "graduateemployment",
-      component: GraduateEmployment
+    {
+      path: "/activitiesview",
+      name: "activitiesview",
+      component: ActivitiesView
     },
-	{
-        path: "/scholarshipview",
-        name: "scholarshipview",
-        component: ScholarshipView
-      }
-    ]
-  });
+
+    {
+      path: "/scholarshipview",
+      name: "scholarshipview",
+      component: ScholarshipView
+    }
+  ]
+});
