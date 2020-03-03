@@ -51,56 +51,11 @@ export default {
       images: {
         login: require("../assets/users.png")
       },
-      redirect: [
-         {
-          username: "aif",
-          password: "1811",
-          path: "/studentprofile"
-        },
-        {
-          username: "nc",
-          password: "1414",
-          path: "/graduates"
-        },
-        {
-          username: "may",
-          password: "1234",
-          path: "/studenthealthrecord"
-        },
-	{
-          username: "may1",
-          password: "1234",
-          path: "/graduateemployment"
-        },
-        {
-          username: "boom",
-          password: "1234",
-          path: "/financial"
-        },
-        {
-          username: "knpia",
-          password: "1234",
-          path: "/discipline"
-        },
-        {
-          username: "june",
-          password: "1234",
-          path: "/activities"
-        },
-        {
-          username: "fern",
-          password: "1234",
-          path: "/scholarship"
-        }
-      ],
       member: {
         user: "",
-        pass: "",
-        active: false
+        pass: ""
       },
-      value: String,
-      submitted: false,
-      valid: false
+      value: true
     }
   },
 
@@ -114,21 +69,27 @@ export default {
         alert("กรุณาป้อนรหัสผ่าน")
         return
       }
-      let isLogin = false
-      this.redirect.forEach(direct => {
-        if (
-          direct.username === this.member.user &&
-          direct.password === this.member.pass
-        ) {
-          isLogin = true
-          this.$router.push(direct.path)
+      http.get("/user/" + this.member.user + "/" + this.member.pass).then(res => {
+        if (res.data) {
           alert("เข้าสู่ระบบสำเร็จ")
-          return
+          switch (res.data.userType.userType) {
+            case "นักศึกษา":
+              this.$router.push("/student")
+              break;
+            case "เจ้าหน้างานทุน":
+              this.$router.push("/scholarship")
+              break;
+            case "เจ้าหน้าที่งานวินัย":
+              this.$router.push("/discipline")
+              break;
+            case "เจ้าหน้าที่กิจการนักศึกษา":
+              this.$router.push("/activities")
+              break;
+          }
+        } else {
+          alert("ไม่สามารถเข้าสู่ระบบ")
         }
       })
-      if (!isLogin) {
-        alert("ไม่สามารถเข้าสู่ระบบ, กรุณาลองใหม่อีกครั้ง")
-      }
     }
   }
 }

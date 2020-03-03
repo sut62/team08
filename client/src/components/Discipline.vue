@@ -1,23 +1,20 @@
 <template>
   <v-app>
-    <v-app-bar app dark class="indigo">
-      <v-toolbar-title class="headline text-uppercase">
-        <span>System : </span>
-        <span class="font-weight-light">DISCIPLINE</span>
-      </v-toolbar-title>
+    <v-app-bar app dark >
+      <v-toolbar dense style="z-index: 99">
+      <v-toolbar-title>SYSTEM: DISCIPLINE</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn class="ma-2" text icon color="lighten-2" :to="{name: 'home'}">
-        <span class="mr-2">
-          <v-icon large>home</v-icon>
-        </span>
+      <v-btn icon :to="{name: 'login'}">
+        <v-icon>mdi-account-arrow-left</v-icon>
       </v-btn>
+    </v-toolbar>
     </v-app-bar>
     <br />
     <br />
     <br />
     <br />
 
-    <div>
+    <div >
       <v-layout text-center wrap>
         <v-flex mb-4>
           <br />
