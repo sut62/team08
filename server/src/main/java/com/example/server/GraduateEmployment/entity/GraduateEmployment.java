@@ -69,15 +69,15 @@ public class GraduateEmployment {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = WorkStatus.class)
     @JoinColumn(name = "WorkStatus_ID", insertable = true)
-    private WorkStatus workstatus;
+    private @NotNull WorkStatus workstatus;
 
    @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "StudentProfile_ID", insertable = true)
-    private StudentProfile studentprofile;
+    private @NotNull StudentProfile studentprofile;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = EducationLevel.class)
     @JoinColumn(name = "EducationLevel_ID", insertable = true)
-    private EducationLevel educationlevel;
+    private @NotNull EducationLevel educationlevel;
 
     public WorkStatus getWorkStatus() {
         return this.workstatus;

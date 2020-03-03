@@ -19,6 +19,10 @@ import com.example.server.Scholarship.repository.ScholarshipTypeRepository;
 import com.example.server.StudentHealthRecord.entity.CongenitalDisease;
 import com.example.server.StudentHealthRecord.entity.DrugAllergyHistory;
 import com.example.server.StudentHealthRecord.repository.*;
+import com.example.server.User.repository.UserRepository;
+import com.example.server.User.repository.UserTypeRepository;
+import com.example.server.User.entity.User;
+import com.example.server.User.entity.UserType;
 import com.example.server.Activities.entity.Institution;
 import com.example.server.Activities.entity.SchoolYear;
 import com.example.server.Activities.repository.InstitutionRepository;
@@ -52,8 +56,9 @@ public class ServerApplication {
 						   CongenitalDiseaseRepository congenitalDiseaseRepository, WorkStatusRepository workstatusRepository,
 						   DrugAllergyHistoryRepository drugAllergyHistoryRepository,
 						   EducationLevelRepository educationlevelRepository,
-						   GraduatesRepository graduatesRepository) {
+						   GraduatesRepository graduatesRepository, UserTypeRepository userTypeRepository, UserRepository userRepository) {
 		return args -> {
+			
 			Stream.of("ผู้หญิง", "ผู้ชาย", "อื่นๆ").forEach(sex -> {
 				Gender gender = new Gender();
 				gender.setGender(sex);
@@ -86,19 +91,6 @@ public class ServerApplication {
 				educationlevel.setEducalevel(edu);
 				educationlevelRepository.save(educationlevel);
 			});
-
-
-			StudentProfile s = new StudentProfile();
-			s.setNameeng("Test Name");
-			s.setNamethai("ทดสอบ ชื่อ");
-			s.setIdcard("B60XXXXX");
-			s.setIdnumber("1234567890123");
-			s.setAddress("address");
-			s.setAge(22);
-			s.setBrithday(new Date());
-			s.setBlood("AB");
-			s.setTel("0834567890");
-			studentprofileRepository.save(s);
 
 			Stream.of("เล่นการพนัน", "ขโมยทรัพย์สิน", "ทำร้ายร่างกาย", "ทุจริต", "วินัยจราจร").forEach(ruleType -> {
 				Breakrule breakrule = new Breakrule(); // สร้าง Object Breakrule
@@ -160,6 +152,49 @@ public class ServerApplication {
 				workstatus.setStatus(status);
 				workstatusRepository.save(workstatus);
 			});
-		};
-	}
+
+			UserType userTypeEntity1 = new UserType();
+			userTypeEntity1.setUserType("นักศึกษา");
+			userTypeRepository.save(userTypeEntity1);
+
+			Stream.of("B5807734",  "B5828104", "B5812431").forEach(username -> {
+				User user = new User();
+				user.setUsername(username);
+				user.setPassword("1234");
+				user.setUserType(userTypeEntity1);
+				userRepository.save(user);
+			});
+			
+
+			UserType userTypeEntity2 = new UserType();
+			userTypeEntity2.setUserType("เจ้าหน้างานทุน");
+			userTypeRepository.save(userTypeEntity2);
+
+			User user2 = new User();
+			user2.setUsername("B5814619");
+			user2.setPassword("1234");
+			user2.setUserType(userTypeEntity2);
+			userRepository.save(user2);
+
+			UserType userTypeEntity3 = new UserType();
+			userTypeEntity3.setUserType("เจ้าหน้าที่งานวินัย");
+			userTypeRepository.save(userTypeEntity3);
+
+			User user3 = new User();
+			user3.setUsername("B5801206");
+			user3.setPassword("1234");
+			user3.setUserType(userTypeEntity3);
+			userRepository.save(user3);
+
+			UserType userTypeEntity4 = new UserType();
+			userTypeEntity4.setUserType("เจ้าหน้าที่กิจการนักศึกษา");
+			userTypeRepository.save(userTypeEntity4);
+
+			User user4 = new User();
+			user4.setUsername("B5815173");
+			user4.setPassword("1234");
+			user4.setUserType(userTypeEntity4);
+			userRepository.save(user4);
+	};
+}
 }

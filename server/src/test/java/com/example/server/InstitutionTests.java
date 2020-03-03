@@ -37,19 +37,19 @@ public class InstitutionTests {
     void B5815173_testCreateInstitutionOK() {
         Institution institution = new Institution();
         institution.setInsid(1L);
-        institution.setInsname("อาคารเรียนรวม 1");
+        institution.setInsname("ชมรมคอมพิวเตอร์");
         institution = institutionRepository.saveAndFlush(institution);
 
         Optional<Institution> institutionCreated = institutionRepository.findById(institution.getInsid());
         assertEquals(1L, institutionCreated.get().getInsid());
-        assertEquals("อาคารเรียนรวม 1", institutionCreated.get().getInsname());
+        assertEquals("ชมรมคอมพิวเตอร์", institutionCreated.get().getInsname());
     }
 
     @Test
     void B5815173_testInsidMustNotBeNull() {
         Institution institution = new Institution();
         institution.setInsid(null);
-        institution.setInsname("อาคารเรียนรวม 1");
+        institution.setInsname("ชมรมคอมพิวเตอร์");
 
         Set<ConstraintViolation<Institution>> result = validator.validate(institution);
 

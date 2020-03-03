@@ -36,6 +36,7 @@ public class StudentProfile {
     private @NotNull String tel;
 	private @NotNull String address;
 
+
 	public Long getStudentproId() {
 		return this.studentproId;
 	}
@@ -118,15 +119,15 @@ public class StudentProfile {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
 	@JoinColumn(name = "Gender_ID", insertable = true)
-	private Gender gender;
+	private @NotNull Gender gender;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Major.class)
 	@JoinColumn(name = "Major_ID", insertable = true)
-	private Major major;
+	private @NotNull Major major;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
 	@JoinColumn(name = "Status_ID", insertable = true)
-	private Status status;
+	private @NotNull Status status;
 
 	public Gender getGender() {
 		return this.gender;

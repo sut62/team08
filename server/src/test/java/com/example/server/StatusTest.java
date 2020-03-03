@@ -64,7 +64,7 @@ public class StatusTest {
 	@Test
     void B5807734_testStatusMustNotBeNull() {
         Status status = new Status();
-		status.setStatusId(1L);
+		status.setStatusId(4L);
 		status.setStatus(null);
 
 		Set<ConstraintViolation<Status>> result = validator.validate(status);

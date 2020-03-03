@@ -53,14 +53,15 @@ public class StudentHealthRecord {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = StudentProfile.class)
     @JoinColumn(name = "StudentProfile_ID")
-    private StudentProfile studentprofile;
+    private @NotNull StudentProfile studentprofile;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = DrugAllergyHistory.class)
     @JoinColumn(name = "DrugAllergyHistory_ID")
-    private DrugAllergyHistory drugallergyhistory;
+    private @NotNull DrugAllergyHistory drugallergyhistory;
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = CongenitalDisease.class)
     @JoinColumn(name = "CongenitalDisease_ID")
-    private CongenitalDisease congenitaldisease;
+    private @NotNull CongenitalDisease congenitaldisease;
 
     public StudentProfile getStudentprofile() {
         return this.studentprofile;
